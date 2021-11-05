@@ -1,0 +1,9 @@
+{
+    "terminal.integrated.fontFamily": "Dank Mono",
+    "editor.fontFamily": "Dank Mono",
+    "editor.fontLigatures": true,
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+}
