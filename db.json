@@ -1,0 +1,417 @@
+{
+  "members": [
+    {
+      "id": 0,
+      "name": "Fulano",
+      "subname": "da Silva",
+      "responsible": "Agatha Silvana dos Santos",
+      "address": "Rua das mesquitas",
+      "district": "Centro",
+      "phone": "(63) 99985-5888",
+      "email": "asd@ad.com",
+      "city": "Joinville",
+      "associationData": "16/03/2019",
+      "receiveINSS": true,
+      "birthDate": "16/08/2012",
+      "motherName": "Julia",
+      "motherDN": 1231,
+      "motherWorkplace": "Petrobras",
+      "motherIncome": 12000.0,
+      "motherAgeChildBorn": 26,
+      "motherSchooling": "Superior completo",
+      "fatherName": "Rodrigo",
+      "fatherDN": 123,
+      "fatherWorkplace": "Forum",
+      "fatherIncome": 14000.0,
+      "fatherSchooling": "Superior completo",
+      "familyComposition": [
+        {
+          "name": "Juliano",
+          "income": 1000
+        },
+        {
+          "name": "Cristina",
+          "income": 1200
+        }
+      ],
+      "familyIncome": 25000,
+      "residence": "Propria",
+      "rentValue": 2300,
+      "isAPAE": false,
+      "school": "Energia",
+      "schoolSerie": "1 ano",
+      "CEI": "1231231",
+      "othersActivities": "Joga muito videogame",
+      "obs": "Sem observações"
+    },
+    {
+      "id": 1,
+      "name": "Fulano",
+      "subname": "da Silva",
+      "responsible": "Agatha Silvana dos Santos",
+      "address": "Rua das mesquitas",
+      "district": "Centro",
+      "phone": "(63) 99985-5888",
+      "email": "asd@ad.com",
+      "city": "Joinville",
+      "associationData": "16/03/2019",
+      "receiveINSS": true,
+      "birthDate": "16/08/2012",
+      "motherName": "Julia",
+      "motherDN": 1231,
+      "motherWorkplace": "Petrobras",
+      "motherIncome": 12000.0,
+      "motherAgeChildBorn": 26,
+      "motherSchooling": "Superior completo",
+      "fatherName": "Rodrigo",
+      "fatherDN": 123,
+      "fatherWorkplace": "Forum",
+      "fatherIncome": 14000.0,
+      "fatherSchooling": "Superior completo",
+      "familyComposition": [
+        {
+          "name": "Juliano",
+          "income": 1000
+        },
+        {
+          "name": "Cristina",
+          "income": 1200
+        }
+      ],
+      "familyIncome": 25000,
+      "residence": "Propria",
+      "rentValue": 2300,
+      "isAPAE": false,
+      "school": "Energia",
+      "schoolSerie": "1 ano",
+      "CEI": "1231231",
+      "othersActivities": "Joga muito videogame",
+      "obs": "Sem observações"
+    },
+    {
+      "id": 2,
+      "name": "Fulano",
+      "subname": "da Silva",
+      "responsible": "Agatha Silvana dos Santos",
+      "address": "Rua das mesquitas",
+      "district": "Centro",
+      "phone": "(63) 99985-5888",
+      "email": "asd@ad.com",
+      "city": "Joinville",
+      "associationData": "16/03/2019",
+      "receiveINSS": true,
+      "birthDate": "16/08/2012",
+      "motherName": "Julia",
+      "motherDN": 1231,
+      "motherWorkplace": "Petrobras",
+      "motherIncome": 12000.0,
+      "motherAgeChildBorn": 26,
+      "motherSchooling": "Superior completo",
+      "fatherName": "Rodrigo",
+      "fatherDN": 123,
+      "fatherWorkplace": "Forum",
+      "fatherIncome": 14000.0,
+      "fatherSchooling": "Superior completo",
+      "familyComposition": [
+        {
+          "name": "Juliano",
+          "income": 1000
+        },
+        {
+          "name": "Cristina",
+          "income": 1200
+        }
+      ],
+      "familyIncome": 25000,
+      "residence": "Propria",
+      "rentValue": 2300,
+      "isAPAE": false,
+      "school": "Energia",
+      "schoolSerie": "1 ano",
+      "CEI": "1231231",
+      "othersActivities": "Joga muito videogame",
+      "obs": "Sem observações"
+    },
+    {
+      "id": 3,
+      "name": "Fulano",
+      "subname": "da Silva",
+      "responsible": "Agatha Silvana dos Santos",
+      "address": "Rua das mesquitas",
+      "district": "Centro",
+      "phone": "(63) 99985-5888",
+      "email": "asd@ad.com",
+      "city": "Joinville",
+      "associationData": "16/03/2019",
+      "receiveINSS": true,
+      "birthDate": "16/08/2012",
+      "motherName": "Julia",
+      "motherDN": 1231,
+      "motherWorkplace": "Petrobras",
+      "motherIncome": 12000.0,
+      "motherAgeChildBorn": 26,
+      "motherSchooling": "Superior completo",
+      "fatherName": "Rodrigo",
+      "fatherDN": 123,
+      "fatherWorkplace": "Forum",
+      "fatherIncome": 14000.0,
+      "fatherSchooling": "Superior completo",
+      "familyComposition": [
+        {
+          "name": "Juliano",
+          "income": 1000
+        },
+        {
+          "name": "Cristina",
+          "income": 1200
+        }
+      ],
+      "familyIncome": 25000,
+      "residence": "Propria",
+      "rentValue": 2300,
+      "isAPAE": false,
+      "school": "Energia",
+      "schoolSerie": "1 ano",
+      "CEI": "1231231",
+      "othersActivities": "Joga muito videogame",
+      "obs": "Sem observações"
+    },
+    {
+      "id": 4,
+      "name": "Fulano",
+      "subname": "da Silva",
+      "responsible": "Agatha Silvana dos Santos",
+      "address": "Rua das mesquitas",
+      "district": "Centro",
+      "phone": "(63) 99985-5888",
+      "email": "asd@ad.com",
+      "city": "Joinville",
+      "associationData": "16/03/2019",
+      "receiveINSS": true,
+      "birthDate": "16/08/2012",
+      "motherName": "Julia",
+      "motherDN": 1231,
+      "motherWorkplace": "Petrobras",
+      "motherIncome": 12000.0,
+      "motherAgeChildBorn": 26,
+      "motherSchooling": "Superior completo",
+      "fatherName": "Rodrigo",
+      "fatherDN": 123,
+      "fatherWorkplace": "Forum",
+      "fatherIncome": 14000.0,
+      "fatherSchooling": "Superior completo",
+      "familyComposition": [
+        {
+          "name": "Juliano",
+          "income": 1000
+        },
+        {
+          "name": "Cristina",
+          "income": 1200
+        }
+      ],
+      "familyIncome": 25000,
+      "residence": "Propria",
+      "rentValue": 2300,
+      "isAPAE": false,
+      "school": "Energia",
+      "schoolSerie": "1 ano",
+      "CEI": "1231231",
+      "othersActivities": "Joga muito videogame",
+      "obs": "Sem observações"
+    },
+    {
+      "id": 5,
+      "name": "Fulano",
+      "subname": "da Silva",
+      "responsible": "Agatha Silvana dos Santos",
+      "address": "Rua das mesquitas",
+      "district": "Centro",
+      "phone": "(63) 99985-5888",
+      "email": "asd@ad.com",
+      "city": "Joinville",
+      "associationData": "16/03/2019",
+      "receiveINSS": true,
+      "birthDate": "16/08/2012",
+      "motherName": "Julia",
+      "motherDN": 1231,
+      "motherWorkplace": "Petrobras",
+      "motherIncome": 12000.0,
+      "motherAgeChildBorn": 26,
+      "motherSchooling": "Superior completo",
+      "fatherName": "Rodrigo",
+      "fatherDN": 123,
+      "fatherWorkplace": "Forum",
+      "fatherIncome": 14000.0,
+      "fatherSchooling": "Superior completo",
+      "familyComposition": [
+        {
+          "name": "Juliano",
+          "income": 1000
+        },
+        {
+          "name": "Cristina",
+          "income": 1200
+        }
+      ],
+      "familyIncome": 25000,
+      "residence": "Propria",
+      "rentValue": 2300,
+      "isAPAE": false,
+      "school": "Energia",
+      "schoolSerie": "1 ano",
+      "CEI": "1231231",
+      "othersActivities": "Joga muito videogame",
+      "obs": "Sem observações"
+    },
+    {
+      "id": 6,
+      "name": "Fulano",
+      "subname": "da Silva",
+      "responsible": "Agatha Silvana dos Santos",
+      "address": "Rua das mesquitas",
+      "district": "Centro",
+      "phone": "(63) 99985-5888",
+      "email": "asd@ad.com",
+      "city": "Joinville",
+      "associationData": "16/03/2019",
+      "receiveINSS": true,
+      "birthDate": "16/08/2012",
+      "motherName": "Julia",
+      "motherDN": 1231,
+      "motherWorkplace": "Petrobras",
+      "motherIncome": 12000.0,
+      "motherAgeChildBorn": 26,
+      "motherSchooling": "Superior completo",
+      "fatherName": "Rodrigo",
+      "fatherDN": 123,
+      "fatherWorkplace": "Forum",
+      "fatherIncome": 14000.0,
+      "fatherSchooling": "Superior completo",
+      "familyComposition": [
+        {
+          "name": "Juliano",
+          "income": 1000
+        },
+        {
+          "name": "Cristina",
+          "income": 1200
+        }
+      ],
+      "familyIncome": 25000,
+      "residence": "Propria",
+      "rentValue": 2300,
+      "isAPAE": false,
+      "school": "Energia",
+      "schoolSerie": "1 ano",
+      "CEI": "1231231",
+      "othersActivities": "Joga muito videogame",
+      "obs": "Sem observações"
+    },
+    {
+      "id": 7,
+      "name": "Fulano",
+      "subname": "da Silva",
+      "responsible": "Agatha Silvana dos Santos",
+      "address": "Rua das mesquitas",
+      "district": "Centro",
+      "phone": "(63) 99985-5888",
+      "email": "asd@ad.com",
+      "city": "Joinville",
+      "associationData": "16/03/2019",
+      "receiveINSS": true,
+      "birthDate": "16/08/2012",
+      "motherName": "Julia",
+      "motherDN": 1231,
+      "motherWorkplace": "Petrobras",
+      "motherIncome": 12000.0,
+      "motherAgeChildBorn": 26,
+      "motherSchooling": "Superior completo",
+      "fatherName": "Rodrigo",
+      "fatherDN": 123,
+      "fatherWorkplace": "Forum",
+      "fatherIncome": 14000.0,
+      "fatherSchooling": "Superior completo",
+      "familyComposition": [
+        {
+          "name": "Juliano",
+          "income": 1000
+        },
+        {
+          "name": "Cristina",
+          "income": 1200
+        }
+      ],
+      "familyIncome": 25000,
+      "residence": "Propria",
+      "rentValue": 2300,
+      "isAPAE": false,
+      "school": "Energia",
+      "schoolSerie": "1 ano",
+      "CEI": "1231231",
+      "othersActivities": "Joga muito videogame",
+      "obs": "Sem observações"
+    },
+    {
+      "id": 8,
+      "name": "Fulano",
+      "subname": "da Silva",
+      "responsible": "Agatha Silvana dos Santos",
+      "address": "Rua das mesquitas",
+      "district": "Centro",
+      "phone": "(63) 99985-5888",
+      "email": "asd@ad.com",
+      "city": "Joinville",
+      "associationData": "16/03/2019",
+      "receiveINSS": true,
+      "birthDate": "16/08/2012",
+      "motherName": "Julia",
+      "motherDN": 1231,
+      "motherWorkplace": "Petrobras",
+      "motherIncome": 12000.0,
+      "motherAgeChildBorn": 26,
+      "motherSchooling": "Superior completo",
+      "fatherName": "Rodrigo",
+      "fatherDN": 123,
+      "fatherWorkplace": "Forum",
+      "fatherIncome": 14000.0,
+      "fatherSchooling": "Superior completo",
+      "familyComposition": [
+        {
+          "name": "Juliano",
+          "income": 1000
+        },
+        {
+          "name": "Cristina",
+          "income": 1200
+        }
+      ],
+      "familyIncome": 25000,
+      "residence": "Propria",
+      "rentValue": 2300,
+      "isAPAE": false,
+      "school": "Energia",
+      "schoolSerie": "1 ano",
+      "CEI": "1231231",
+      "othersActivities": "Joga muito videogame",
+      "obs": "Sem observações"
+    }
+  ],
+  "contributors": [
+    {
+      "id": 0,
+      "name": "",
+      "cpf": "",
+      "joinDate": "",
+      "birthDate": ""
+    }
+  ],
+  "users": [
+    {
+      "id": 0,
+      "usarname": "admin",
+      "password": "admin",
+      "userLevel": 3
+    }
+  ]
+}
