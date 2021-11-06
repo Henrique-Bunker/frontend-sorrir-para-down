@@ -94,7 +94,7 @@ const Students = ({ title, showLink }: Props) => (
     </Table>
     {showLink && (
       <Link color="primary" href="/alunos" sx={{ mt: 3 }}>
-        See more Students
+        Mostrar mais
       </Link>
     )}
   </React.Fragment>

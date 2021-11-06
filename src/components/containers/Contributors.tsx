@@ -19,6 +19,11 @@ function createData(
   return { id, date, name, shipTo, paymentMethod, amount }
 }
 
+type Props = {
+  title: string
+  showLink?: boolean
+}
+
 const rows = [
   createData(
     0,
@@ -62,13 +67,9 @@ const rows = [
   )
 ]
 
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault()
-}
-
-const Contributors = () => (
+const Contributors = ({ title, showLink }: Props) => (
   <React.Fragment>
-    <Title>Colaboradores Recentes</Title>
+    <Title>{title}</Title>
     <Table size="small">
       <TableHead>
         <TableRow>
@@ -91,9 +92,11 @@ const Contributors = () => (
         ))}
       </TableBody>
     </Table>
-    <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-      See more Students
-    </Link>
+    {showLink && (
+      <Link color="primary" href="/colaboradores" sx={{ mt: 3 }}>
+        Mostrar mais
+      </Link>
+    )}
   </React.Fragment>
 )
 

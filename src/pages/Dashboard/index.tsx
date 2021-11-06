@@ -55,13 +55,13 @@ function DashboardContent() {
               {/* Recent Contributors */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Contributors />
+                  <Contributors title="Colaboradores Recentes" showLink />
                 </Paper>
               </Grid>
               {/* Recent Volunteers */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Volunteers />
+                  <Volunteers title="Voluntarios Recentes" showLink />
                 </Paper>
               </Grid>
             </Grid>
