@@ -49,7 +49,7 @@ function DashboardContent() {
               {/* Recent Students */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Students title="Alunos Recentes" showLink />
+                  <Students title="Alunos Recentes" showLink limit={5} />
                 </Paper>
               </Grid>
               {/* Recent Contributors */}
