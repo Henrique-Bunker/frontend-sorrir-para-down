@@ -70,7 +70,7 @@ const rows = [
 const Contributors = ({ title, showLink }: Props) => (
   <React.Fragment>
     <Title>{title}</Title>
-    <Table size="small">
+    <Table size="medium">
       <TableHead>
         <TableRow>
           <TableCell>Date</TableCell>
