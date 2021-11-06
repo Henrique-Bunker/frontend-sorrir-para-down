@@ -7,15 +7,13 @@ import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import Students from 'components/containers/Students'
-import Volunteers from 'components/containers/Volunteers'
-import Contributors from 'components/containers/Contributors'
 import Copyright from 'components/miscellaneous/Copyright'
 import Sidebar from '../../components/Sidebar'
 import AppBar from 'components/AppBar'
 
 const mdTheme = createTheme()
 
-function DashboardContent() {
+const StudentsPage = () => {
   const [open, setOpen] = React.useState(true)
   const toggleDrawer = () => {
     setOpen(!open)
@@ -25,11 +23,7 @@ function DashboardContent() {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar
-          toggleDrawer={toggleDrawer}
-          openState={open}
-          title="Dashboard"
-        />
+        <AppBar toggleDrawer={toggleDrawer} openState={open} title="Alunos" />
         <Sidebar toggleDrawer={toggleDrawer} openState={open} />
         <Box
           component="main"
@@ -49,19 +43,7 @@ function DashboardContent() {
               {/* Recent Students */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Students title="Alunos Recentes" showLink />
-                </Paper>
-              </Grid>
-              {/* Recent Contributors */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Contributors />
-                </Paper>
-              </Grid>
-              {/* Recent Volunteers */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Volunteers />
+                  <Students title="Lista de Alunos" />
                 </Paper>
               </Grid>
             </Grid>
@@ -73,6 +55,4 @@ function DashboardContent() {
   )
 }
 
-export default function Dashboard() {
-  return <DashboardContent />
-}
+export default StudentsPage

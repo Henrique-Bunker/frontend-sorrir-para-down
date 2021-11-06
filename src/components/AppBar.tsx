@@ -12,6 +12,7 @@ interface AppBarProps extends MuiAppBarProps {
 type Props = {
   toggleDrawer: () => void
   openState: boolean
+  title: string
 }
 
 const drawerWidth = 240
@@ -34,7 +35,7 @@ const AppBarContainer = styled(MuiAppBar, {
   })
 }))
 
-const AppBar = ({ toggleDrawer, openState }: Props) => (
+const AppBar = ({ toggleDrawer, openState, title }: Props) => (
   <AppBarContainer position="absolute" open={openState}>
     <Toolbar
       sx={{
@@ -60,7 +61,7 @@ const AppBar = ({ toggleDrawer, openState }: Props) => (
         noWrap
         sx={{ flexGrow: 1 }}
       >
-        Dashboard
+        {title}
       </Typography>
     </Toolbar>
   </AppBarContainer>
