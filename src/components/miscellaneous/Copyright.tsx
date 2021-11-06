@@ -3,8 +3,9 @@ import Link from '@mui/material/Link'
 
 type Props = {
   sx: {
-    mt: number
-    mb: number
+    mt?: number
+    mb?: number
+    pt?: number
   }
 }
 
