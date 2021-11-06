@@ -1,0 +1,11 @@
+.container_phone {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container_phone .selected-flag,
+.container_phone .flag-dropdown {
+  display: none;
+}

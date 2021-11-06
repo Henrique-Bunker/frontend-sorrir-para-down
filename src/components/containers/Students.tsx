@@ -4,7 +4,9 @@ import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
+import { Button } from '@mui/material'
 import TableRow from '@mui/material/TableRow'
+import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import Title from '../miscellaneous/Title'
 import axios from 'axios'
 
@@ -12,6 +14,8 @@ type Props = {
   title: string
   showLink?: boolean
   limit?: number
+  showHandles?: boolean
+  handleAddMember?: () => void
 }
 
 type studentProps = {
@@ -24,7 +28,13 @@ type studentProps = {
   receiveINSS?: boolean
 }
 
-const Students = ({ title, showLink, limit }: Props) => {
+const Students = ({
+  title,
+  showLink,
+  limit,
+  showHandles,
+  handleAddMember
+}: Props) => {
   const [students, setStudents] = useState<studentProps[]>([
     {
       id: 0,
@@ -51,7 +61,14 @@ const Students = ({ title, showLink, limit }: Props) => {
             <TableCell>Telefone</TableCell>
             <TableCell>E-mail</TableCell>
             <TableCell>Cidade</TableCell>
-            <TableCell align="right">INSS</TableCell>
+            <TableCell>INSS</TableCell>
+            {showHandles && (
+              <TableCell align="right">
+                <Button color="success" onClick={handleAddMember}>
+                  <PersonAddIcon />
+                </Button>
+              </TableCell>
+            )}
           </TableRow>
         </TableHead>
         <TableBody>

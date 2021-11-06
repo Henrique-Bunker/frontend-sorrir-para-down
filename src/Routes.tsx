@@ -13,7 +13,7 @@ const Routes = () => {
         <Route path="/" element={<Main />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/alunos" element={<StudentsPage />} />
+        <Route path="/alunos" element={<StudentsPage gridSize={12} />} />
         <Route path="/colaboradores" element={<ContributorsPage />} />
         <Route path="/voluntarios" element={<VolunteersPage />} />
       </ReactRoutes>

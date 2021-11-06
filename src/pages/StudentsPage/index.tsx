@@ -10,11 +10,34 @@ import Students from 'components/containers/Students'
 import Copyright from 'components/miscellaneous/Copyright'
 import Sidebar from '../../components/Sidebar'
 import AppBar from 'components/AppBar'
+import AddStudent from 'components/students/AddStudent'
+import type { GridSize } from '@material-ui/core'
 
 const mdTheme = createTheme()
 
-const StudentsPage = () => {
+type Props = {
+  component?: JSX.Element
+  gridSize: GridSize
+}
+
+const StudentsPage = ({ component, gridSize }: Props) => {
   const [open, setOpen] = React.useState(true)
+  const [size, setSize] = React.useState(gridSize)
+  const handleAddMember = () => {
+    setShowElement(<AddStudent />)
+    setSize(8)
+  }
+  const [showElement, setShowElement] = React.useState(
+    component ? (
+      component
+    ) : (
+      <Students
+        title="Lista de Alunos"
+        showHandles={true}
+        handleAddMember={handleAddMember}
+      />
+    )
+  )
   const toggleDrawer = () => {
     setOpen(!open)
   }
@@ -39,11 +62,11 @@ const StudentsPage = () => {
         >
           <Toolbar />
           <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
+            <Grid container spacing={3} justifyContent="center">
               {/* Recent Students */}
-              <Grid item xs={12}>
+              <Grid item xs={size}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Students title="Lista de Alunos" />
+                  {showElement}
                 </Paper>
               </Grid>
             </Grid>
