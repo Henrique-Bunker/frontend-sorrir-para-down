@@ -1,7 +1,7 @@
-import Main from 'pages/Main'
+import Routes from 'Routes'
 
 function App() {
-  return <Main />
+  return <Routes />
 }
 
 export default App
