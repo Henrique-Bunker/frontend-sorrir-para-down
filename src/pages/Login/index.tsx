@@ -10,9 +10,9 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-import Email from 'components/Forms/Email'
-import Password from 'components/Forms/Password'
-import LabelWithCheckbox from 'components/Forms/LabelWithCheckbox'
+import Email from 'components/forms/Email'
+import Password from 'components/forms/Password'
+import LabelWithCheckbox from 'components/forms/LabelWithCheckbox'
 import Copyright from 'components/miscellaneous/Copyright'
 
 const theme = createTheme()
