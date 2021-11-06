@@ -24,7 +24,7 @@ const StudentsPage = ({ component, gridSize }: Props) => {
   const [open, setOpen] = React.useState(true)
   const [size, setSize] = React.useState(gridSize)
   const handleAddMember = () => {
-    setShowElement(<AddStudent />)
+    setShowElement(<AddStudent handleCloseTab={handleCloseTab} />)
     setSize(8)
   }
   const [showElement, setShowElement] = React.useState(
@@ -40,6 +40,16 @@ const StudentsPage = ({ component, gridSize }: Props) => {
   )
   const toggleDrawer = () => {
     setOpen(!open)
+  }
+
+  const handleCloseTab = () => {
+    setShowElement(
+      <Students
+        title="Lista de Alunos"
+        showHandles={true}
+        handleAddMember={handleAddMember}
+      />
+    )
   }
 
   return (

@@ -19,6 +19,7 @@ const Phone = () => {
       disableDropdown={true}
       disableCountryCode={true}
       inputProps={{ name: 'studentPhone' }}
+      inputStyle={{ height: '100%' }}
     />
   )
 }
