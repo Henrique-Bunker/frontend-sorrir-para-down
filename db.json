@@ -2,7 +2,7 @@
   "members": [
     {
       "id": 0,
-      "name": "Fulano",
+      "name": "Fulano1",
       "subname": "da Silva",
       "responsible": "Agatha Silvana dos Santos",
       "address": "Rua das mesquitas",
@@ -16,13 +16,13 @@
       "motherName": "Julia",
       "motherDN": 1231,
       "motherWorkplace": "Petrobras",
-      "motherIncome": 12000.0,
+      "motherIncome": 12000,
       "motherAgeChildBorn": 26,
       "motherSchooling": "Superior completo",
       "fatherName": "Rodrigo",
       "fatherDN": 123,
       "fatherWorkplace": "Forum",
-      "fatherIncome": 14000.0,
+      "fatherIncome": 14000,
       "fatherSchooling": "Superior completo",
       "familyComposition": [
         {
@@ -46,7 +46,7 @@
     },
     {
       "id": 1,
-      "name": "Fulano",
+      "name": "Fulano2",
       "subname": "da Silva",
       "responsible": "Agatha Silvana dos Santos",
       "address": "Rua das mesquitas",
@@ -60,13 +60,13 @@
       "motherName": "Julia",
       "motherDN": 1231,
       "motherWorkplace": "Petrobras",
-      "motherIncome": 12000.0,
+      "motherIncome": 12000,
       "motherAgeChildBorn": 26,
       "motherSchooling": "Superior completo",
       "fatherName": "Rodrigo",
       "fatherDN": 123,
       "fatherWorkplace": "Forum",
-      "fatherIncome": 14000.0,
+      "fatherIncome": 14000,
       "fatherSchooling": "Superior completo",
       "familyComposition": [
         {
@@ -104,13 +104,13 @@
       "motherName": "Julia",
       "motherDN": 1231,
       "motherWorkplace": "Petrobras",
-      "motherIncome": 12000.0,
+      "motherIncome": 12000,
       "motherAgeChildBorn": 26,
       "motherSchooling": "Superior completo",
       "fatherName": "Rodrigo",
       "fatherDN": 123,
       "fatherWorkplace": "Forum",
-      "fatherIncome": 14000.0,
+      "fatherIncome": 14000,
       "fatherSchooling": "Superior completo",
       "familyComposition": [
         {
@@ -148,13 +148,13 @@
       "motherName": "Julia",
       "motherDN": 1231,
       "motherWorkplace": "Petrobras",
-      "motherIncome": 12000.0,
+      "motherIncome": 12000,
       "motherAgeChildBorn": 26,
       "motherSchooling": "Superior completo",
       "fatherName": "Rodrigo",
       "fatherDN": 123,
       "fatherWorkplace": "Forum",
-      "fatherIncome": 14000.0,
+      "fatherIncome": 14000,
       "fatherSchooling": "Superior completo",
       "familyComposition": [
         {
@@ -192,13 +192,13 @@
       "motherName": "Julia",
       "motherDN": 1231,
       "motherWorkplace": "Petrobras",
-      "motherIncome": 12000.0,
+      "motherIncome": 12000,
       "motherAgeChildBorn": 26,
       "motherSchooling": "Superior completo",
       "fatherName": "Rodrigo",
       "fatherDN": 123,
       "fatherWorkplace": "Forum",
-      "fatherIncome": 14000.0,
+      "fatherIncome": 14000,
       "fatherSchooling": "Superior completo",
       "familyComposition": [
         {
@@ -236,13 +236,13 @@
       "motherName": "Julia",
       "motherDN": 1231,
       "motherWorkplace": "Petrobras",
-      "motherIncome": 12000.0,
+      "motherIncome": 12000,
       "motherAgeChildBorn": 26,
       "motherSchooling": "Superior completo",
       "fatherName": "Rodrigo",
       "fatherDN": 123,
       "fatherWorkplace": "Forum",
-      "fatherIncome": 14000.0,
+      "fatherIncome": 14000,
       "fatherSchooling": "Superior completo",
       "familyComposition": [
         {
@@ -280,13 +280,13 @@
       "motherName": "Julia",
       "motherDN": 1231,
       "motherWorkplace": "Petrobras",
-      "motherIncome": 12000.0,
+      "motherIncome": 12000,
       "motherAgeChildBorn": 26,
       "motherSchooling": "Superior completo",
       "fatherName": "Rodrigo",
       "fatherDN": 123,
       "fatherWorkplace": "Forum",
-      "fatherIncome": 14000.0,
+      "fatherIncome": 14000,
       "fatherSchooling": "Superior completo",
       "familyComposition": [
         {
@@ -324,13 +324,13 @@
       "motherName": "Julia",
       "motherDN": 1231,
       "motherWorkplace": "Petrobras",
-      "motherIncome": 12000.0,
+      "motherIncome": 12000,
       "motherAgeChildBorn": 26,
       "motherSchooling": "Superior completo",
       "fatherName": "Rodrigo",
       "fatherDN": 123,
       "fatherWorkplace": "Forum",
-      "fatherIncome": 14000.0,
+      "fatherIncome": 14000,
       "fatherSchooling": "Superior completo",
       "familyComposition": [
         {
@@ -368,13 +368,13 @@
       "motherName": "Julia",
       "motherDN": 1231,
       "motherWorkplace": "Petrobras",
-      "motherIncome": 12000.0,
+      "motherIncome": 12000,
       "motherAgeChildBorn": 26,
       "motherSchooling": "Superior completo",
       "fatherName": "Rodrigo",
       "fatherDN": 123,
       "fatherWorkplace": "Forum",
-      "fatherIncome": 14000.0,
+      "fatherIncome": 14000,
       "fatherSchooling": "Superior completo",
       "familyComposition": [
         {
