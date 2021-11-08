@@ -11,6 +11,7 @@ import Copyright from 'components/miscellaneous/Copyright'
 import Sidebar from '../../components/Sidebar'
 import AppBar from 'components/AppBar'
 import AddStudent from 'components/students/AddStudent'
+import StudentsTable from 'components/students/StudentsTable'
 import type { GridSize } from '@material-ui/core'
 
 const mdTheme = createTheme()
@@ -28,15 +29,7 @@ const StudentsPage = ({ component, gridSize }: Props) => {
     setSize(8)
   }
   const [showElement, setShowElement] = React.useState(
-    component ? (
-      component
-    ) : (
-      <Students
-        title="Lista de Alunos"
-        showHandles={true}
-        handleAddMember={handleAddMember}
-      />
-    )
+    component ? component : <StudentsTable />
   )
   const toggleDrawer = () => {
     setOpen(!open)
@@ -44,11 +37,13 @@ const StudentsPage = ({ component, gridSize }: Props) => {
 
   const handleCloseTab = () => {
     setShowElement(
-      <Students
-        title="Lista de Alunos"
-        showHandles={true}
-        handleAddMember={handleAddMember}
-      />
+      <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+        <Students
+          title="Lista de Alunos"
+          showHandles={true}
+          handleAddMember={handleAddMember}
+        />
+      </Paper>
     )
   }
 
@@ -75,9 +70,7 @@ const StudentsPage = ({ component, gridSize }: Props) => {
             <Grid container spacing={3} justifyContent="center">
               {/* Recent Students */}
               <Grid item xs={size}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  {showElement}
-                </Paper>
+                {showElement}
               </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
