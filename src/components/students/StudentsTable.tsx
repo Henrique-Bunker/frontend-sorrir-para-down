@@ -22,6 +22,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import ConfirmDel from 'components/ConfirmDel'
 import { render } from '@testing-library/react'
+import { StudentProp } from 'types/Student'
 
 interface TablePaginationActionsProps {
   count: number
@@ -31,17 +32,6 @@ interface TablePaginationActionsProps {
     event: React.MouseEvent<HTMLButtonElement>,
     newPage: number
   ) => void
-}
-
-type studentProps = {
-  id: number
-  name: string
-  subname: string
-  responsible: string
-  phone?: string
-  email?: string
-  city?: string
-  receiveINSS?: boolean
 }
 
 interface Column {
@@ -144,7 +134,7 @@ export default function StudentsTab() {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
-  const [students, setStudents] = React.useState<studentProps[]>([
+  const [students, setStudents] = React.useState<StudentProp[]>([
     {
       id: 0,
       name: '',
@@ -153,7 +143,7 @@ export default function StudentsTab() {
     }
   ])
 
-  const openDelDialog = (student: studentProps) => {
+  const openDelDialog = (student: StudentProp) => {
     render(
       <ConfirmDel
         studentName={`${student.name} ${student.subname}`}

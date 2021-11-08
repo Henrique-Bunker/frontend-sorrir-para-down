@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import Title from '../miscellaneous/Title'
 import axios from 'axios'
+import { StudentProp } from 'types/Student'
 
 type Props = {
   title: string
@@ -18,16 +19,6 @@ type Props = {
   handleAddMember?: () => void
 }
 
-type studentProps = {
-  id: number
-  name: string
-  subname: string
-  phone?: string
-  email?: string
-  city?: string
-  receiveINSS?: boolean
-}
-
 const Students = ({
   title,
   showLink,
@@ -35,11 +26,12 @@ const Students = ({
   showHandles,
   handleAddMember
 }: Props) => {
-  const [students, setStudents] = useState<studentProps[]>([
+  const [students, setStudents] = useState<StudentProp[]>([
     {
       id: 0,
       name: '',
-      subname: ''
+      subname: '',
+      responsible: ''
     }
   ])
 
@@ -72,7 +64,7 @@ const Students = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {students.map((student: studentProps) => (
+          {students.map((student: StudentProp) => (
             <TableRow key={student.id}>
               <TableCell>{`${student.name} ${student.subname}`}</TableCell>
               <TableCell>{student.phone}</TableCell>
