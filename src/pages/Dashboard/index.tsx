@@ -6,12 +6,12 @@ import Toolbar from '@mui/material/Toolbar'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
-import Students from 'components/containers/Students'
 import Volunteers from 'components/containers/Volunteers'
 import Contributors from 'components/containers/Contributors'
 import Copyright from 'components/miscellaneous/Copyright'
 import Sidebar from '../../components/Sidebar'
 import AppBar from 'components/AppBar'
+import StudentsTable from 'components/students/StudentsTable'
 
 const mdTheme = createTheme()
 
@@ -49,7 +49,7 @@ function DashboardContent() {
               {/* Recent Students */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Students title="Alunos Recentes" showLink limit={5} />
+                  <StudentsTable isDash />
                 </Paper>
               </Grid>
               {/* Recent Contributors */}

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useTheme } from '@mui/material/styles'
+import Link from '@mui/material/Link'
 import Box from '@mui/material/Box'
 import Table from '@mui/material/Table'
 import TableHead from '@mui/material/TableHead'
@@ -23,9 +24,12 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import ConfirmDel from 'components/ConfirmDel'
 import { render } from '@testing-library/react'
 import { StudentProp } from 'types/Student'
+import Title from '../miscellaneous/Title'
+import { Divider } from '@mui/material'
 
 type Props = {
-  handleAddStudent: () => void
+  handleAddStudent?: () => void
+  isDash?: boolean
 }
 
 interface TablePaginationActionsProps {
@@ -124,9 +128,9 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   )
 }
 
-export default function StudentsTab({ handleAddStudent }: Props) {
+export default function StudentsTable({ handleAddStudent, isDash }: Props) {
   const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const [rowsPerPage, setRowsPerPage] = React.useState(isDash ? 5 : 10)
 
   const [students, setStudents] = React.useState<StudentProp[]>([
     {
@@ -172,92 +176,107 @@ export default function StudentsTab({ handleAddStudent }: Props) {
   }
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
-        <TableHead>
-          <TableRow>
-            {columns.map((column) => (
-              <TableCell
-                key={column.id}
-                align={column.align}
-                style={{ minWidth: column.minWidth }}
-              >
-                {column.label}
-              </TableCell>
-            ))}
-            <TableCell key="menu" align="center" style={{ minWidth: 100 }}>
-              <IconButton
-                color="success"
-                aria-label="show"
-                onClick={handleAddStudent}
-              >
-                <PersonAddIcon />
-              </IconButton>
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {(rowsPerPage > 0
-            ? students.slice(
-                page * rowsPerPage,
-                page * rowsPerPage + rowsPerPage
-              )
-            : students
-          ).map((student) => (
-            <TableRow key={student.id}>
-              <TableCell component="th" scope="row">
-                {`${student.name} ${student.subname}`}
-              </TableCell>
-              <TableCell>{student.responsible}</TableCell>
-              <TableCell style={{ width: 160 }}>{student.phone}</TableCell>
-              <TableCell style={{ width: 160 }}>{student.email}</TableCell>
-              <TableCell style={{ width: 160 }}>{student.city}</TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                <IconButton color="default" aria-label="show">
-                  <VisibilityIcon />
-                </IconButton>
-                <IconButton color="info" aria-label="edit">
-                  <EditIcon />
-                </IconButton>
-                <IconButton
-                  color="error"
-                  aria-label="delete"
-                  onClick={() => {
-                    openDelDialog(student)
-                  }}
+    <>
+      <Title>Alunos Recentes</Title>
+      <Divider />
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
                 >
-                  <DeleteOutlineIcon />
-                </IconButton>
-              </TableCell>
+                  {column.label}
+                </TableCell>
+              ))}
+              {!isDash && (
+                <TableCell key="menu" align="center" style={{ minWidth: 100 }}>
+                  <IconButton
+                    color="success"
+                    aria-label="show"
+                    onClick={handleAddStudent}
+                  >
+                    <PersonAddIcon />
+                  </IconButton>
+                </TableCell>
+              )}
             </TableRow>
-          ))}
-          {emptyRows > 0 && (
-            <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
-            </TableRow>
+          </TableHead>
+          <TableBody>
+            {(rowsPerPage > 0
+              ? students.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : students
+            ).map((student) => (
+              <TableRow key={student.id}>
+                <TableCell component="th" scope="row">
+                  {`${student.name} ${student.subname}`}
+                </TableCell>
+                <TableCell>{student.responsible}</TableCell>
+                <TableCell style={{ width: 160 }}>{student.phone}</TableCell>
+                <TableCell style={{ width: 160 }}>{student.email}</TableCell>
+                <TableCell style={{ width: 160 }}>{student.city}</TableCell>
+                {!isDash && (
+                  <TableCell style={{ width: 160 }} align="right">
+                    <IconButton color="default" aria-label="show">
+                      <VisibilityIcon />
+                    </IconButton>
+                    <IconButton color="info" aria-label="edit">
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton
+                      color="error"
+                      aria-label="delete"
+                      onClick={() => {
+                        openDelDialog(student)
+                      }}
+                    >
+                      <DeleteOutlineIcon />
+                    </IconButton>
+                  </TableCell>
+                )}
+              </TableRow>
+            ))}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
+          </TableBody>
+          {!isDash && (
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[10, 20, 30, { label: 'All', value: -1 }]}
+                  colSpan={3}
+                  count={students.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  SelectProps={{
+                    inputProps: {
+                      'aria-label': 'rows per page'
+                    },
+                    native: true
+                  }}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                />
+              </TableRow>
+            </TableFooter>
           )}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[10, 20, 30, { label: 'All', value: -1 }]}
-              colSpan={3}
-              count={students.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              SelectProps={{
-                inputProps: {
-                  'aria-label': 'rows per page'
-                },
-                native: true
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-            />
-          </TableRow>
-        </TableFooter>
-      </Table>
-    </TableContainer>
+        </Table>
+      </TableContainer>
+      {isDash && (
+        <Link color="primary" href="/alunos" sx={{ mt: 3 }}>
+          Mostrar mais
+        </Link>
+      )}
+    </>
   )
 }
