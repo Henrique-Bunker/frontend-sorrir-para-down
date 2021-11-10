@@ -5,8 +5,6 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
-import Paper from '@mui/material/Paper'
-import Students from 'components/containers/Students'
 import Copyright from 'components/miscellaneous/Copyright'
 import Sidebar from '../../components/Sidebar'
 import AppBar from 'components/AppBar'
@@ -29,22 +27,15 @@ const StudentsPage = ({ component, gridSize }: Props) => {
     setSize(8)
   }
   const [showElement, setShowElement] = React.useState(
-    component ? component : <StudentsTable />
+    component ? component : <StudentsTable handleAddStudent={handleAddMember} />
   )
   const toggleDrawer = () => {
     setOpen(!open)
   }
 
   const handleCloseTab = () => {
-    setShowElement(
-      <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-        <Students
-          title="Lista de Alunos"
-          showHandles={true}
-          handleAddMember={handleAddMember}
-        />
-      </Paper>
-    )
+    setSize(12)
+    setShowElement(<StudentsTable handleAddStudent={handleAddMember} />)
   }
 
   return (

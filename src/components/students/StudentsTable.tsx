@@ -24,6 +24,10 @@ import ConfirmDel from 'components/ConfirmDel'
 import { render } from '@testing-library/react'
 import { StudentProp } from 'types/Student'
 
+type Props = {
+  handleAddStudent: () => void
+}
+
 interface TablePaginationActionsProps {
   count: number
   page: number
@@ -47,17 +51,7 @@ const columns: readonly Column[] = [
   { id: 'responsable', label: 'Responsavel', minWidth: 170 },
   { id: 'phone', label: 'Telefone', minWidth: 100 },
   { id: 'email', label: 'E-mail', minWidth: 100 },
-  { id: 'city', label: 'Cidade', minWidth: 100 },
-  {
-    id: 'menu',
-    label: (
-      <IconButton color="success" aria-label="show">
-        <PersonAddIcon />
-      </IconButton>
-    ),
-    minWidth: 100,
-    align: 'center'
-  }
+  { id: 'city', label: 'Cidade', minWidth: 100 }
 ]
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
@@ -130,7 +124,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   )
 }
 
-export default function StudentsTab() {
+export default function StudentsTab({ handleAddStudent }: Props) {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
@@ -191,6 +185,15 @@ export default function StudentsTab() {
                 {column.label}
               </TableCell>
             ))}
+            <TableCell key="menu" align="center" style={{ minWidth: 100 }}>
+              <IconButton
+                color="success"
+                aria-label="show"
+                onClick={handleAddStudent}
+              >
+                <PersonAddIcon />
+              </IconButton>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

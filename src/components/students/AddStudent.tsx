@@ -8,8 +8,9 @@ import StudentAdress from 'components/forms/student/StudentAdress'
 import StudentMother from 'components/forms/student/StudentMother'
 import StudentFather from 'components/forms/student/StudentFather'
 import FamilyComopition from 'components/forms/student/FamilyComposition'
-import { Fab, Link } from '@mui/material'
+import { Fab, Link, Paper } from '@mui/material'
 import ClearIcon from '@mui/icons-material/Clear'
+import Container from '@mui/material/Container'
 
 type Props = {
   handleCloseTab: () => void
@@ -33,39 +34,47 @@ const AddStudent = ({ handleCloseTab }: Props) => {
   }
 
   return (
-    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-      <Grid
-        container
-        justifyContent="space-between"
-        alignContent="flex-end"
-        sx={{ p: 3, mb: 2 }}
-      >
-        <Typography variant="h6" gutterBottom>
-          Adicionar Aluno
-        </Typography>
-        <Link onClick={handleCloseTab}>
-          <Fab size="small" color="secondary" sx={{ backgroundColor: 'red' }}>
-            <ClearIcon />
-          </Fab>
-        </Link>
-      </Grid>
-      <AboutStudent />
-      <StudentAdress />
-      <StudentMother />
-      <StudentFather />
-      <FamilyComopition />
-      <Grid container spacing={3} justifyContent="center">
-        <Button
-          type="submit"
-          variant="contained"
-          size="large"
-          color="success"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Salvar
-        </Button>
-      </Grid>
-    </Box>
+    <Paper variant="outlined">
+      <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Grid
+            container
+            justifyContent="space-between"
+            alignContent="flex-end"
+            sx={{ p: 3, mb: 2 }}
+          >
+            <Typography variant="h6" gutterBottom>
+              Adicionar Aluno
+            </Typography>
+            <Link onClick={handleCloseTab}>
+              <Fab
+                size="small"
+                color="secondary"
+                sx={{ backgroundColor: 'red' }}
+              >
+                <ClearIcon />
+              </Fab>
+            </Link>
+          </Grid>
+          <AboutStudent />
+          <StudentAdress />
+          <StudentMother />
+          <StudentFather />
+          <FamilyComopition />
+          <Grid container spacing={3} justifyContent="center">
+            <Button
+              type="submit"
+              variant="contained"
+              size="large"
+              color="success"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Salvar
+            </Button>
+          </Grid>
+        </Box>
+      </Container>
+    </Paper>
   )
 }
 
