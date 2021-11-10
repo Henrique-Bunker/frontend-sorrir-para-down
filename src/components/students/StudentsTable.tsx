@@ -26,6 +26,7 @@ import { render } from '@testing-library/react'
 import { StudentProp } from 'types/Student'
 import Title from '../miscellaneous/Title'
 import { Divider } from '@mui/material'
+import ShowStudent from './ShowStudent'
 
 type Props = {
   handleAddStudent?: () => void
@@ -151,6 +152,10 @@ export default function StudentsTable({ handleAddStudent, isDash }: Props) {
     )
   }
 
+  const handleShowStudent = (student: StudentProp) => {
+    render(<ShowStudent props={student} />)
+  }
+
   React.useEffect(() => {
     axios.get(`http://localhost:5000/members`).then((response) => {
       setStudents(response.data)
@@ -223,7 +228,13 @@ export default function StudentsTable({ handleAddStudent, isDash }: Props) {
                 <TableCell style={{ width: 160 }}>{student.city}</TableCell>
                 {!isDash && (
                   <TableCell style={{ width: 160 }} align="right">
-                    <IconButton color="default" aria-label="show">
+                    <IconButton
+                      color="default"
+                      aria-label="show"
+                      onClick={() => {
+                        handleShowStudent(student)
+                      }}
+                    >
                       <VisibilityIcon />
                     </IconButton>
                     <IconButton color="info" aria-label="edit">
