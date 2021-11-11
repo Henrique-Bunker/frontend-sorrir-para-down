@@ -12,8 +12,8 @@ const StudentMother = () => (
         {/* LINK - Mother Name */}
         <TextField
           required
-          id="name"
-          name="name"
+          id="motherName"
+          name="motherName"
           label="Nome"
           fullWidth
           autoComplete="given-name"
@@ -24,8 +24,8 @@ const StudentMother = () => (
       <Grid item xs={12} sm={5}>
         <TextField
           required
-          id="subName"
-          name="subname"
+          id="motherSubName"
+          name="motherSubname"
           label="Sobrenome"
           fullWidth
           autoComplete="family-name"
@@ -36,11 +36,10 @@ const StudentMother = () => (
       <Grid item xs={12} sm={3}>
         <TextField
           required
-          id="birthDate"
-          name="birthDate"
+          id="motherBirthDate"
+          name="motherBirthDate"
           label="Data Nasc."
           fullWidth
-          autoComplete="family-name"
           variant="standard"
         />
       </Grid>
@@ -48,11 +47,11 @@ const StudentMother = () => (
       <Grid item xs={12} sm={5}>
         <TextField
           required
-          id="email"
-          name="email"
+          id="motherWorkplace"
+          name="motherWorkplace"
           label="Local Trabalo"
           fullWidth
-          autoComplete="family-name"
+          autoComplete="mother-workplace"
           variant="standard"
         />
       </Grid>
@@ -60,11 +59,10 @@ const StudentMother = () => (
       <Grid item xs={12} sm={4}>
         <TextField
           required
-          id="phone"
-          name="phone"
+          id="motherIncome"
+          name="motherIncome"
           label="Renda"
           fullWidth
-          autoComplete="family-name"
           variant="standard"
         />
       </Grid>
@@ -72,11 +70,10 @@ const StudentMother = () => (
       <Grid item xs={12} sm={3}>
         <TextField
           required
-          id="phone"
-          name="phone"
+          id="motherAgeHaveChild"
+          name="motherAgeHaveChild"
           label="Idade que teve filho"
           fullWidth
-          autoComplete="family-name"
           variant="standard"
         />
       </Grid>
@@ -84,11 +81,11 @@ const StudentMother = () => (
       <Grid item xs={12}>
         <TextField
           required
-          id="responsable"
-          name="responsable"
+          id="motherSchooling"
+          name="motherSchooling"
           label="Escolaridade"
           fullWidth
-          autoComplete="shipping address-line1"
+          autoComplete="mother-schooling"
           variant="standard"
         />
       </Grid>
