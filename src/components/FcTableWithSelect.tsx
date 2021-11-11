@@ -240,7 +240,7 @@ export default function FcTableWithSelect() {
   const [fill, setFill] = React.useState(false)
   const [data, setData] = React.useState<DataProps[]>([
     {
-      id: '',
+      id: 'dummy-id',
       name: '',
       age: 0,
       income: 0
@@ -370,37 +370,38 @@ export default function FcTableWithSelect() {
                   const isItemSelected = isSelected(data.id)
                   const labelId = `enhanced-table-checkbox-${index}`
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, data.id)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={data.id}
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            'aria-labelledby': labelId
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
+                  if (data.id != 'dummy-id')
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, data.id)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={data.id}
+                        selected={isItemSelected}
                       >
-                        {data.name}
-                      </TableCell>
-                      <TableCell align="right">{data.age}</TableCell>
-                      <TableCell align="right">{data.income}</TableCell>
-                    </TableRow>
-                  )
+                        <TableCell padding="checkbox">
+                          <Checkbox
+                            color="primary"
+                            checked={isItemSelected}
+                            inputProps={{
+                              'aria-labelledby': labelId
+                            }}
+                          />
+                        </TableCell>
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
+                        >
+                          {data.name}
+                        </TableCell>
+                        <TableCell align="right">{data.age}</TableCell>
+                        <TableCell align="right">{data.income}</TableCell>
+                      </TableRow>
+                    )
                 })}
               {emptyRows > 0 && (
                 <TableRow
