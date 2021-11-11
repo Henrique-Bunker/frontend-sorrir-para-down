@@ -12,8 +12,8 @@ const StudentAdress = () => (
       <Grid item xs={8}>
         <TextField
           required
-          id="address"
-          name="address"
+          id="street"
+          name="street"
           label="Rua"
           fullWidth
           autoComplete="shipping address-line1"
@@ -24,8 +24,8 @@ const StudentAdress = () => (
       <Grid item xs={4}>
         <TextField
           required
-          id="address1"
-          name="address1"
+          id="district"
+          name="district"
           label="Bairro"
           fullWidth
           autoComplete="shipping address-line1"
@@ -36,8 +36,8 @@ const StudentAdress = () => (
       <Grid item xs={4}>
         <TextField
           required
-          id="address1"
-          name="address1"
+          id="city"
+          name="city"
           label="Cidade"
           fullWidth
           autoComplete="shipping address-line1"
@@ -48,8 +48,8 @@ const StudentAdress = () => (
       <Grid item xs={4}>
         <TextField
           required
-          id="address1"
-          name="address1"
+          id="estate"
+          name="estate"
           label="Estado"
           fullWidth
           autoComplete="shipping address-line1"
@@ -72,8 +72,8 @@ const StudentAdress = () => (
       <Grid item xs={6}>
         <TextField
           required
-          id="zipcode"
-          name="zipcode"
+          id="house"
+          name="house"
           label="Casa"
           fullWidth
           autoComplete="shipping address-line1"
@@ -84,8 +84,8 @@ const StudentAdress = () => (
       <Grid item xs={6}>
         <TextField
           required
-          id="zipcode"
-          name="zipcode"
+          id="rentValue"
+          name="rentValue"
           label="Valor Aluguel"
           fullWidth
           autoComplete="shipping address-line1"
