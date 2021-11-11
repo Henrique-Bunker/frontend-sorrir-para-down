@@ -21,6 +21,7 @@ import { visuallyHidden } from '@mui/utils'
 import AddComposition from './students/AddComposition'
 import { render } from '@testing-library/react'
 
+// NOTE interface Data
 interface Data {
   income: number
   name: string
@@ -76,6 +77,7 @@ interface HeadCell {
   numeric: boolean
 }
 
+// NOTE Header Cells
 const headCells: readonly HeadCell[] = [
   {
     id: 'name',
@@ -97,6 +99,7 @@ const headCells: readonly HeadCell[] = [
   }
 ]
 
+// NOTE EnhancedTableProps
 interface EnhancedTableProps {
   numSelected: number
   onRequestSort: (
@@ -109,6 +112,7 @@ interface EnhancedTableProps {
   rowCount: number
 }
 
+// SECTION EnhancedTableHead
 function EnhancedTableHead(props: EnhancedTableProps) {
   const {
     onSelectAllClick,
@@ -162,6 +166,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     </TableHead>
   )
 }
+// !SECTION
 
 interface EnhancedTableToolbarProps {
   numSelected: number
@@ -169,6 +174,7 @@ interface EnhancedTableToolbarProps {
   handleRemove?: () => void
 }
 
+// SECTION EnhancedTableToolbar
 const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
   const { numSelected } = props
   const { handleAdd } = props
@@ -210,12 +216,14 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton onClick={handleRemove}>
+            {/* LINK Delete */}
             <DeleteIcon />
           </IconButton>
         </Tooltip>
       ) : (
         <Tooltip title="Adicionar membro">
           <IconButton color="success" onClick={handleAdd}>
+            {/* LINK Add */}
             <PersonAddIcon />
           </IconButton>
         </Tooltip>
@@ -230,7 +238,9 @@ type DataProps = {
   age: number
   income: number
 }
+// !SECTION
 
+// SECTION FcTableWithSelect
 export default function FcTableWithSelect() {
   const [order, setOrder] = React.useState<Order>('asc')
   const [orderBy, setOrderBy] = React.useState<keyof Data>('income')
@@ -238,6 +248,7 @@ export default function FcTableWithSelect() {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
   const [fill, setFill] = React.useState(false)
+  // NOTE [data, setData]
   const [data, setData] = React.useState<DataProps[]>([
     {
       id: 'dummy-id',
@@ -256,6 +267,7 @@ export default function FcTableWithSelect() {
     setOrderBy(property)
   }
 
+  // NOTE handleSelectAllClick
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       const newSelecteds = data.map((n) => n.id)
@@ -265,6 +277,7 @@ export default function FcTableWithSelect() {
     setSelected([])
   }
 
+  // NOTE handleClick
   const handleClick = (event: React.MouseEvent<unknown>, id: string) => {
     const selectedIndex = selected.indexOf(id)
     let newSelected: readonly string[] = []
@@ -285,6 +298,7 @@ export default function FcTableWithSelect() {
     setSelected(newSelected)
   }
 
+  // NOTE handleDeleteMember
   const handleDeleteMember = () => {
     const newData: DataProps[] = []
 
@@ -323,12 +337,14 @@ export default function FcTableWithSelect() {
     setPage(0)
   }
 
+  // NOTE handleSubmitMember
   const handleSubmitMember = (member: DataProps) => {
     const memberGroup = [...data, member]
     fill ? setData(memberGroup) : setData([member])
     setFill(true)
   }
 
+  // NOTE handleAddCompositionMember
   const handleAddCompositionMember = () => {
     render(<AddComposition onSubmit={handleSubmitMember} />)
   }
@@ -363,7 +379,9 @@ export default function FcTableWithSelect() {
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-              rows.slice().sort(getComparator(order, orderBy)) */}
+              rows.slice().sort(getComparator(order, orderBy))
+              NOTE TableBody
+              */}
               {stableSort(data, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((data, index) => {
@@ -428,3 +446,4 @@ export default function FcTableWithSelect() {
     </Box>
   )
 }
+// !SECTION

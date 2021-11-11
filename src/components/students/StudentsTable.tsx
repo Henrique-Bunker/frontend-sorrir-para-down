@@ -59,6 +59,7 @@ const columns: readonly Column[] = [
   { id: 'city', label: 'Cidade', minWidth: 100 }
 ]
 
+// SECTION Pagination Actions
 function TablePaginationActions(props: TablePaginationActionsProps) {
   const theme = useTheme()
   const { count, page, rowsPerPage, onPageChange } = props
@@ -86,7 +87,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   ) => {
     onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1))
   }
-
+  // !SECTION
   return (
     <Box sx={{ flexShrink: 0, ml: 2.5 }}>
       <IconButton
@@ -129,10 +130,12 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   )
 }
 
+// SECTION Students Table
 export default function StudentsTable({ handleAddStudent, isDash }: Props) {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(isDash ? 5 : 10)
 
+  // NOTE default Students
   const [students, setStudents] = React.useState<StudentProp[]>([
     {
       id: 0,
@@ -142,6 +145,7 @@ export default function StudentsTable({ handleAddStudent, isDash }: Props) {
     }
   ])
 
+  // NOTE Open Del Dialog
   const openDelDialog = (student: StudentProp) => {
     render(
       <ConfirmDel
@@ -152,10 +156,12 @@ export default function StudentsTable({ handleAddStudent, isDash }: Props) {
     )
   }
 
+  // NOTE Handle Show Student
   const handleShowStudent = (student: StudentProp) => {
     render(<ShowStudent props={student} />)
   }
 
+  // ANCHOR Request
   React.useEffect(() => {
     axios.get(`http://localhost:5000/members`).then((response) => {
       setStudents(response.data)
@@ -179,13 +185,14 @@ export default function StudentsTable({ handleAddStudent, isDash }: Props) {
     setRowsPerPage(parseInt(event.target.value, 10))
     setPage(0)
   }
-
+  // !SECTION
   return (
     <>
       <Title>Alunos Recentes</Title>
       <Divider />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+          {/* NOTE TABLE HEADER */}
           <TableHead>
             <TableRow>
               {columns.map((column) => (
@@ -202,6 +209,7 @@ export default function StudentsTable({ handleAddStudent, isDash }: Props) {
                   <IconButton
                     color="success"
                     aria-label="show"
+                    // LINK Add Student
                     onClick={handleAddStudent}
                   >
                     <PersonAddIcon />
@@ -219,6 +227,7 @@ export default function StudentsTable({ handleAddStudent, isDash }: Props) {
               : students
             ).map((student) => (
               <TableRow key={student.id}>
+                {/* NOTE TABLE ROWS */}
                 <TableCell component="th" scope="row">
                   {`${student.name} ${student.subname}`}
                 </TableCell>
@@ -232,6 +241,7 @@ export default function StudentsTable({ handleAddStudent, isDash }: Props) {
                       color="default"
                       aria-label="show"
                       onClick={() => {
+                        // LINK Show Student
                         handleShowStudent(student)
                       }}
                     >
@@ -244,6 +254,7 @@ export default function StudentsTable({ handleAddStudent, isDash }: Props) {
                       color="error"
                       aria-label="delete"
                       onClick={() => {
+                        // LINK Open Del Dialog
                         openDelDialog(student)
                       }}
                     >
