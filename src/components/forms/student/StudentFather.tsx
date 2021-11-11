@@ -12,8 +12,8 @@ const StudentFather = () => (
         {/* LINK - Father Name */}
         <TextField
           required
-          id="name"
-          name="name"
+          id="fatherName"
+          name="fatherName"
           label="Nome"
           fullWidth
           autoComplete="given-name"
@@ -24,8 +24,8 @@ const StudentFather = () => (
       <Grid item xs={12} sm={5}>
         <TextField
           required
-          id="subName"
-          name="subname"
+          id="fatherSubName"
+          name="fatherSubname"
           label="Sobrenome"
           fullWidth
           autoComplete="family-name"
@@ -36,8 +36,8 @@ const StudentFather = () => (
       <Grid item xs={12} sm={3}>
         <TextField
           required
-          id="birthDate"
-          name="birthDate"
+          id="fatherBirthDate"
+          name="fatherBirthDate"
           label="Data Nasc."
           fullWidth
           autoComplete="family-name"
@@ -48,8 +48,8 @@ const StudentFather = () => (
       <Grid item xs={12} sm={5}>
         <TextField
           required
-          id="email"
-          name="email"
+          id="fatherWorkplace"
+          name="fatherWorkplace"
           label="Local Trabalo"
           fullWidth
           autoComplete="family-name"
@@ -60,8 +60,8 @@ const StudentFather = () => (
       <Grid item xs={12} sm={4}>
         <TextField
           required
-          id="phone"
-          name="phone"
+          id="fatherIncome"
+          name="fatherIncome"
           label="Renda"
           fullWidth
           autoComplete="family-name"
@@ -72,11 +72,11 @@ const StudentFather = () => (
       <Grid item xs={12}>
         <TextField
           required
-          id="responsable"
-          name="responsable"
+          id="fatherSchooling"
+          name="fatherSchooling"
           label="Escolaridade"
           fullWidth
-          autoComplete="shipping address-line1"
+          autoComplete="father-schooling"
           variant="standard"
         />
       </Grid>
