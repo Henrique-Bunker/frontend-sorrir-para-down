@@ -70,10 +70,12 @@
       "fatherSchooling": "Superior completo",
       "familyComposition": [
         {
+          "id": 0,
           "name": "Juliano",
           "income": 1000
         },
         {
+          "id": 1,
           "name": "Cristina",
           "income": 1200
         }

@@ -15,27 +15,17 @@ import Paper from '@mui/material/Paper'
 import Checkbox from '@mui/material/Checkbox'
 import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Switch from '@mui/material/Switch'
 import DeleteIcon from '@mui/icons-material/Delete'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import { visuallyHidden } from '@mui/utils'
+import AddComposition from './students/AddComposition'
+import { render } from '@testing-library/react'
 
 interface Data {
   income: number
   name: string
   age: number
 }
-
-function createData(name: string, age: number, income: number): Data {
-  return {
-    name,
-    age,
-    income
-  }
-}
-
-const rows = [createData('Maycon', 18, 1200), createData('Roseta', 26, 2000)]
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -175,10 +165,14 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 
 interface EnhancedTableToolbarProps {
   numSelected: number
+  handleAdd: () => void
+  handleRemove?: () => void
 }
 
 const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
   const { numSelected } = props
+  const { handleAdd } = props
+  const { handleRemove } = props
 
   return (
     <Toolbar
@@ -215,13 +209,13 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
       )}
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton>
+          <IconButton onClick={handleRemove}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
       ) : (
         <Tooltip title="Adicionar membro">
-          <IconButton color="success">
+          <IconButton color="success" onClick={handleAdd}>
             <PersonAddIcon />
           </IconButton>
         </Tooltip>
@@ -230,13 +224,28 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
   )
 }
 
+type DataProps = {
+  id: string
+  name: string
+  age: number
+  income: number
+}
+
 export default function FcTableWithSelect() {
   const [order, setOrder] = React.useState<Order>('asc')
   const [orderBy, setOrderBy] = React.useState<keyof Data>('income')
   const [selected, setSelected] = React.useState<readonly string[]>([])
   const [page, setPage] = React.useState(0)
-  const [dense, setDense] = React.useState(false)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
+  const [fill, setFill] = React.useState(false)
+  const [data, setData] = React.useState<DataProps[]>([
+    {
+      id: '',
+      name: '',
+      age: 0,
+      income: 0
+    }
+  ])
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -249,19 +258,19 @@ export default function FcTableWithSelect() {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name)
+      const newSelecteds = data.map((n) => n.id)
       setSelected(newSelecteds)
       return
     }
     setSelected([])
   }
 
-  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
-    const selectedIndex = selected.indexOf(name)
+  const handleClick = (event: React.MouseEvent<unknown>, id: string) => {
+    const selectedIndex = selected.indexOf(id)
     let newSelected: readonly string[] = []
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name)
+      newSelected = newSelected.concat(selected, id)
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1))
     } else if (selectedIndex === selected.length - 1) {
@@ -276,6 +285,33 @@ export default function FcTableWithSelect() {
     setSelected(newSelected)
   }
 
+  const handleDeleteMember = () => {
+    const newData: DataProps[] = []
+
+    selected.forEach((select) => {
+      data.forEach((member) => {
+        if (member.id != select) {
+          newData.push(member)
+          return false
+        }
+      })
+    })
+
+    if (newData.length == 0) {
+      setData([
+        {
+          id: '',
+          name: '',
+          age: 0,
+          income: 0
+        }
+      ])
+    }
+
+    setData(newData)
+    setSelected([])
+  }
+
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage)
   }
@@ -287,25 +323,35 @@ export default function FcTableWithSelect() {
     setPage(0)
   }
 
-  const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDense(event.target.checked)
+  const handleSubmitMember = (member: DataProps) => {
+    const memberGroup = [...data, member]
+    fill ? setData(memberGroup) : setData([member])
+    setFill(true)
+  }
+
+  const handleAddCompositionMember = () => {
+    render(<AddComposition onSubmit={handleSubmitMember} />)
   }
 
   const isSelected = (name: string) => selected.indexOf(name) !== -1
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0
 
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          handleAdd={handleAddCompositionMember}
+          handleRemove={handleDeleteMember}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size="small"
           >
             <EnhancedTableHead
               numSelected={selected.length}
@@ -313,25 +359,25 @@ export default function FcTableWithSelect() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={data.length}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
               rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(data, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.name)
+                .map((data, index) => {
+                  const isItemSelected = isSelected(data.id)
                   const labelId = `enhanced-table-checkbox-${index}`
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, data.id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={data.id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -349,17 +395,17 @@ export default function FcTableWithSelect() {
                         scope="row"
                         padding="none"
                       >
-                        {row.name}
+                        {data.name}
                       </TableCell>
-                      <TableCell align="right">{row.age}</TableCell>
-                      <TableCell align="right">{row.income}</TableCell>
+                      <TableCell align="right">{data.age}</TableCell>
+                      <TableCell align="right">{data.income}</TableCell>
                     </TableRow>
                   )
                 })}
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    height: (dense ? 33 : 53) * emptyRows
+                    height: 33 * emptyRows
                   }}
                 >
                   <TableCell colSpan={6} />
@@ -371,17 +417,13 @@ export default function FcTableWithSelect() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={data.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
     </Box>
   )
 }
