@@ -16,7 +16,15 @@ type Props = {
   handleCloseTab: () => void
 }
 
+type CompositionProps = {
+  id: string
+  name: string
+  age: number
+  income: number
+}
+
 const AddStudent = ({ handleCloseTab }: Props) => {
+  const [composition, setComposition] = React.useState<CompositionProps[]>([])
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     //console.log(event.currentTarget)
@@ -29,8 +37,14 @@ const AddStudent = ({ handleCloseTab }: Props) => {
       phone: data.get('phone'),
       assocDate: data.get('assocDate'),
       responsable: data.get('responsable'),
-      studentPhone: data.get('studentPhone')
+      studentPhone: data.get('studentPhone'),
+      composition: composition
     })
+  }
+
+  // NOTE handleAddComposition
+  const handleAddComposition = (composition: CompositionProps[]) => {
+    setComposition(composition)
   }
 
   return (
@@ -60,7 +74,7 @@ const AddStudent = ({ handleCloseTab }: Props) => {
           <StudentAdress />
           <StudentMother />
           <StudentFather />
-          <FamilyComopition />
+          <FamilyComopition handleComposition={handleAddComposition} />
           <Grid container spacing={3} justifyContent="center">
             <Button
               type="submit"

@@ -238,10 +238,15 @@ type DataProps = {
   age: number
   income: number
 }
+
+type Props = {
+  handleChange: (field: DataProps[]) => void
+}
+
 // !SECTION
 
 // SECTION FcTableWithSelect
-export default function FcTableWithSelect() {
+export default function FcTableWithSelect({ handleChange }: Props) {
   const [order, setOrder] = React.useState<Order>('asc')
   const [orderBy, setOrderBy] = React.useState<keyof Data>('income')
   const [selected, setSelected] = React.useState<readonly string[]>([])
@@ -342,6 +347,7 @@ export default function FcTableWithSelect() {
     const memberGroup = [...data, member]
     fill ? setData(memberGroup) : setData([member])
     setFill(true)
+    handleChange(memberGroup)
   }
 
   // NOTE handleAddCompositionMember
