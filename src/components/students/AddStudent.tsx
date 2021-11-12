@@ -12,6 +12,7 @@ import { Fab, Link, Paper } from '@mui/material'
 import ClearIcon from '@mui/icons-material/Clear'
 import Container from '@mui/material/Container'
 import { FamilyMemberProp } from 'types/Student'
+import axios from 'axios'
 
 type Props = {
   handleCloseTab: () => void
@@ -19,10 +20,60 @@ type Props = {
 
 const AddStudent = ({ handleCloseTab }: Props) => {
   const [composition, setComposition] = React.useState<FamilyMemberProp[]>([])
+  const [phone, setPhone] = React.useState('')
+
+  //NOTE handlePhone
+  const handlePhone = (studentPhone: string) => {
+    setPhone(studentPhone)
+  }
+
+  // NOTE handleSubmit
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    //console.log(event.currentTarget)
     const data = new FormData(event.currentTarget)
+
+    // ANCHOR Post
+    axios
+      .post(`http://localhost:5000/members`, {
+        name: data.get('studentName'),
+        subname: data.get('subname'),
+        responsible: data.get('responsable'),
+        street: data.get('street'),
+        district: data.get('district'),
+        phone: phone,
+        email: data.get('email'),
+        city: data.get('city'),
+        associationData: data.get('assocDate'),
+        receiveINSS: data.get('receiveINSS'),
+        birthDate: data.get('birthDate'),
+        motherName: data.get('motherName'),
+        motherDN: data.get('motherDN'),
+        motherWorkplace: data.get('motherWorkplace'),
+        motherIncome: data.get('motherIncome'),
+        motherAgeChildBorn: data.get('motherAgeChildBorn'),
+        motherSchooling: data.get('motherSchooling'),
+        fatherName: data.get('fatherName'),
+        fatherDN: data.get('fatherDN'),
+        fatherWorkplace: data.get('fatherWorkplace'),
+        fatherIncome: data.get('fatherIncome'),
+        fatherSchooling: data.get('fatherSchooling'),
+        familyComposition: composition,
+        familyIncome: data.get('familyIncome'),
+        residence: data.get('residence'),
+        rentValue: data.get('rentValue'),
+        isAPAE: data.get('isAPAE'),
+        school: data.get('school'),
+        schoolSerie: data.get('schoolSerie'),
+        CEI: data.get('CEI'),
+        othersActivities: data.get('othersActivities'),
+        obs: data.get('obs')
+      })
+      .then(() => {
+        console.log({ phone })
+        window.location.reload()
+      })
+
+    //console.log(event.currentTarget)
     console.log({
       name: data.get('studentName'),
       subName: data.get('subname'),
@@ -64,7 +115,7 @@ const AddStudent = ({ handleCloseTab }: Props) => {
               </Fab>
             </Link>
           </Grid>
-          <AboutStudent />
+          <AboutStudent handlePhone={handlePhone} />
           <StudentAdress />
           <StudentMother />
           <StudentFather />

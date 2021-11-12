@@ -3,8 +3,18 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import './phone.css'
 
-const Phone = () => {
+type Props = {
+  handler: (phone: string) => void
+}
+
+const Phone = ({ handler }: Props) => {
   const [phone, setPhone] = React.useState('')
+
+  const handlePhone = (memberPhone: string) => {
+    setPhone(memberPhone)
+    handler(memberPhone)
+  }
+
   return (
     <PhoneInput
       containerClass="container_phone"
@@ -14,7 +24,7 @@ const Phone = () => {
       regions={'south-america'}
       masks={{ br: '(..) .....-....' }}
       value={phone}
-      onChange={(phone) => setPhone(phone)}
+      onChange={(phone) => handlePhone(phone)}
       disableSearchIcon={true}
       disableDropdown={true}
       disableCountryCode={true}

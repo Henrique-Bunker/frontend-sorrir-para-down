@@ -4,7 +4,11 @@ import Phone from 'components/forms/Phone'
 import { Chip, Divider } from '@mui/material'
 import Date from 'components/forms/Date'
 
-const AboutStudent = () => {
+type Props = {
+  handlePhone: (phone: string) => void
+}
+
+const AboutStudent = ({ handlePhone }: Props) => {
   return (
     <>
       <Divider variant="middle" sx={{ alignItems: 'center' }}>
@@ -53,7 +57,7 @@ const AboutStudent = () => {
         </Grid>
         {/* LINK - Phone */}
         <Grid item xs={12} sm={4}>
-          <Phone />
+          <Phone handler={handlePhone} />
         </Grid>
         {/* LINK - Association */}
         <Grid item xs={12} sm={3}>
