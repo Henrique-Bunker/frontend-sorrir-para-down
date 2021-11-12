@@ -1,6 +1,7 @@
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import { Chip, Divider } from '@mui/material'
+import Date from 'components/forms/Date'
 
 const StudentMother = () => (
   <>
@@ -34,14 +35,7 @@ const StudentMother = () => (
       </Grid>
       {/* LINK - Mother DN */}
       <Grid item xs={12} sm={3}>
-        <TextField
-          required
-          id="motherBirthDate"
-          name="motherBirthDate"
-          label="Data Nasc."
-          fullWidth
-          variant="standard"
-        />
+        <Date txtLabel="Data Nasc" componentName="motherBirthDate" />
       </Grid>
       {/* LINK - Mother Workplace */}
       <Grid item xs={12} sm={5}>
