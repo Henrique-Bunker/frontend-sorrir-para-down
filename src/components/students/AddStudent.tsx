@@ -11,20 +11,14 @@ import FamilyComopition from 'components/forms/student/FamilyComposition'
 import { Fab, Link, Paper } from '@mui/material'
 import ClearIcon from '@mui/icons-material/Clear'
 import Container from '@mui/material/Container'
+import { FamilyMemberProp } from 'types/Student'
 
 type Props = {
   handleCloseTab: () => void
 }
 
-type CompositionProps = {
-  id: string
-  name: string
-  age: number
-  income: number
-}
-
 const AddStudent = ({ handleCloseTab }: Props) => {
-  const [composition, setComposition] = React.useState<CompositionProps[]>([])
+  const [composition, setComposition] = React.useState<FamilyMemberProp[]>([])
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     //console.log(event.currentTarget)
@@ -43,7 +37,7 @@ const AddStudent = ({ handleCloseTab }: Props) => {
   }
 
   // NOTE handleAddComposition
-  const handleAddComposition = (composition: CompositionProps[]) => {
+  const handleAddComposition = (composition: FamilyMemberProp[]) => {
     setComposition(composition)
   }
 

@@ -20,13 +20,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import { visuallyHidden } from '@mui/utils'
 import AddComposition from './students/AddComposition'
 import { render } from '@testing-library/react'
-
-// NOTE interface Data
-interface Data {
-  income: number
-  name: string
-  age: number
-}
+import { FamilyMemberProp } from 'types/Student'
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -72,7 +66,7 @@ function stableSort<T>(
 
 interface HeadCell {
   disablePadding: boolean
-  id: keyof Data
+  id: keyof FamilyMemberProp
   label: string
   numeric: boolean
 }
@@ -104,7 +98,7 @@ interface EnhancedTableProps {
   numSelected: number
   onRequestSort: (
     event: React.MouseEvent<unknown>,
-    property: keyof Data
+    property: keyof FamilyMemberProp
   ) => void
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void
   order: Order
@@ -123,7 +117,8 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     onRequestSort
   } = props
   const createSortHandler =
-    (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+    (property: keyof FamilyMemberProp) =>
+    (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property)
     }
 
@@ -232,15 +227,8 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
   )
 }
 
-type DataProps = {
-  id: string
-  name: string
-  age: number
-  income: number
-}
-
 type Props = {
-  handleChange: (field: DataProps[]) => void
+  handleChange: (field: FamilyMemberProp[]) => void
 }
 
 // !SECTION
@@ -248,13 +236,13 @@ type Props = {
 // SECTION FcTableWithSelect
 export default function FcTableWithSelect({ handleChange }: Props) {
   const [order, setOrder] = React.useState<Order>('asc')
-  const [orderBy, setOrderBy] = React.useState<keyof Data>('income')
+  const [orderBy, setOrderBy] = React.useState<keyof FamilyMemberProp>('income')
   const [selected, setSelected] = React.useState<readonly string[]>([])
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
   const [fill, setFill] = React.useState(false)
   // NOTE [data, setData]
-  const [data, setData] = React.useState<DataProps[]>([
+  const [data, setData] = React.useState<FamilyMemberProp[]>([
     {
       id: 'dummy-id',
       name: '',
@@ -265,7 +253,7 @@ export default function FcTableWithSelect({ handleChange }: Props) {
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
-    property: keyof Data
+    property: keyof FamilyMemberProp
   ) => {
     const isAsc = orderBy === property && order === 'asc'
     setOrder(isAsc ? 'desc' : 'asc')
@@ -305,7 +293,7 @@ export default function FcTableWithSelect({ handleChange }: Props) {
 
   // NOTE handleDeleteMember
   const handleDeleteMember = () => {
-    const newData: DataProps[] = []
+    const newData: FamilyMemberProp[] = []
 
     selected.forEach((select) => {
       data.forEach((member) => {
@@ -343,7 +331,7 @@ export default function FcTableWithSelect({ handleChange }: Props) {
   }
 
   // NOTE handleSubmitMember
-  const handleSubmitMember = (member: DataProps) => {
+  const handleSubmitMember = (member: FamilyMemberProp) => {
     const memberGroup = [...data, member]
     fill ? setData(memberGroup) : setData([member])
     setFill(true)

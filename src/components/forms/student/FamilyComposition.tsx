@@ -1,16 +1,10 @@
 import Grid from '@mui/material/Grid'
 import { Chip, Divider } from '@mui/material'
 import FcTableWithSelect from '../../FcTableWithSelect'
-
-type CompositionProps = {
-  id: string
-  name: string
-  age: number
-  income: number
-}
+import { FamilyMemberProp } from 'types/Student'
 
 type Props = {
-  handleComposition: (field: CompositionProps[]) => void
+  handleComposition: (field: FamilyMemberProp[]) => void
 }
 
 const FamilyComposition = ({ handleComposition }: Props) => (

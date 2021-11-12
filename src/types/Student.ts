@@ -8,3 +8,10 @@ export type StudentProp = {
   city?: string
   receiveINSS?: boolean
 }
+
+export type FamilyMemberProp = {
+  id: string
+  name: string
+  age: number
+  income: number
+}

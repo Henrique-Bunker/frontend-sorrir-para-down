@@ -8,15 +8,10 @@ import { Grid } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import { v4 as uuid_v4 } from 'uuid'
+import { FamilyMemberProp } from 'types/Student'
 
-type DataProps = {
-  id: string
-  name: string
-  age: number
-  income: number
-}
 type Props = {
-  onSubmit: (member: DataProps) => void
+  onSubmit: (member: FamilyMemberProp) => void
 }
 
 export default function AddComposition({ onSubmit }: Props) {
