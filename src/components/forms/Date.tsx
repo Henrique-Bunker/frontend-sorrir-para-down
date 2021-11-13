@@ -7,10 +7,15 @@ import DatePicker from '@mui/lab/DatePicker'
 type Props = {
   txtLabel: string
   componentName: string
+  handler: (date: Date) => void
 }
 
-export default function BasicDatePicker({ txtLabel, componentName }: Props) {
-  const [value, setValue] = React.useState<Date | null>(null)
+export default function BasicDatePicker({
+  txtLabel,
+  componentName,
+  handler
+}: Props) {
+  const [value, setValue] = React.useState<Date>(new Date())
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -18,7 +23,10 @@ export default function BasicDatePicker({ txtLabel, componentName }: Props) {
         label={txtLabel}
         value={value}
         onChange={(newValue) => {
-          setValue(newValue)
+          if (newValue) {
+            handler(newValue)
+            setValue(newValue)
+          }
         }}
         renderInput={(params) => <TextField {...params} name={componentName} />}
       />
