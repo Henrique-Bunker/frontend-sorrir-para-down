@@ -21,10 +21,36 @@ type Props = {
 const AddStudent = ({ handleCloseTab }: Props) => {
   const [composition, setComposition] = React.useState<FamilyMemberProp[]>([])
   const [phone, setPhone] = React.useState('')
+  const [birthDate, setBirthDate] = React.useState<Date>()
+  const [assocDate, setAssocDate] = React.useState<Date>()
+  const [motherBirthDate, setMotherBirthDate] = React.useState<Date>()
+  const [fatherBirthDate, setFatherBirthDate] = React.useState<Date>()
+  const [incomeFather, setIncomeFather] = React.useState<number>()
+  const [incomeMother, setIncomeMother] = React.useState<number>()
 
   //NOTE handlePhone
   const handlePhone = (studentPhone: string) => {
     setPhone(studentPhone)
+  }
+
+  //NOTE handleBirthDate
+  const handleBirthDate = (birthDate: Date) => {
+    setBirthDate(birthDate)
+  }
+
+  //NOTE handleAssocDate
+  const handleAssocDate = (assochDate: Date) => {
+    setAssocDate(assochDate)
+  }
+
+  //NOTE handleMotherBirthDate
+  const handleMotherBirthDate = (birthDate: Date) => {
+    setMotherBirthDate(birthDate)
+  }
+
+  //NOTE handleFatherBirthDate
+  const handleFatherBirthDate = (birthDate: Date) => {
+    setFatherBirthDate(birthDate)
   }
 
   // NOTE handleSubmit
@@ -32,7 +58,10 @@ const AddStudent = ({ handleCloseTab }: Props) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
 
+    console.log('DATA QUE VEM: ' + birthDate)
+
     // ANCHOR Post
+    // TODO handle null | undefined | values
     axios
       .post(`http://localhost:5000/members`, {
         name: data.get('studentName'),
@@ -43,19 +72,19 @@ const AddStudent = ({ handleCloseTab }: Props) => {
         phone: phone,
         email: data.get('email'),
         city: data.get('city'),
-        associationData: data.get('assocDate'),
+        associationData: assocDate,
         receiveINSS: data.get('receiveINSS'),
-        birthDate: data.get('birthDate'),
+        birthDate: birthDate,
         motherName: data.get('motherName'),
-        motherDN: data.get('motherDN'),
+        motherDN: motherBirthDate,
         motherWorkplace: data.get('motherWorkplace'),
-        motherIncome: data.get('motherIncome'),
-        motherAgeChildBorn: data.get('motherAgeChildBorn'),
+        motherIncome: incomeMother,
+        motherAgeChildBorn: parseInt(data.get('motherAgeChildBorn') as string),
         motherSchooling: data.get('motherSchooling'),
         fatherName: data.get('fatherName'),
-        fatherDN: data.get('fatherDN'),
+        fatherDN: fatherBirthDate,
         fatherWorkplace: data.get('fatherWorkplace'),
-        fatherIncome: data.get('fatherIncome'),
+        fatherIncome: incomeFather,
         fatherSchooling: data.get('fatherSchooling'),
         familyComposition: composition,
         familyIncome: data.get('familyIncome'),
@@ -92,6 +121,16 @@ const AddStudent = ({ handleCloseTab }: Props) => {
     setComposition(composition)
   }
 
+  // NOTE handleAddFatherIncome
+  const handleAddFatherIncome = (income: number) => {
+    setIncomeFather(income)
+  }
+
+  // NOTE handleAddMotherIncome
+  const handleAddMotherIncome = (income: number) => {
+    setIncomeMother(income)
+  }
+
   return (
     <Paper variant="outlined">
       <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
@@ -115,10 +154,20 @@ const AddStudent = ({ handleCloseTab }: Props) => {
               </Fab>
             </Link>
           </Grid>
-          <AboutStudent handlePhone={handlePhone} />
+          <AboutStudent
+            handlePhone={handlePhone}
+            handleBirth={handleBirthDate}
+            handleAssociate={handleAssocDate}
+          />
           <StudentAdress />
-          <StudentMother />
-          <StudentFather />
+          <StudentMother
+            handleIncome={handleAddMotherIncome}
+            handleBirth={handleMotherBirthDate}
+          />
+          <StudentFather
+            handleIncome={handleAddFatherIncome}
+            handleBirth={handleFatherBirthDate}
+          />
           <FamilyComopition handleComposition={handleAddComposition} />
           <Grid container spacing={3} justifyContent="center">
             <Button
