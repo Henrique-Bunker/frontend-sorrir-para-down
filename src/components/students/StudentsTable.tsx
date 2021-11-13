@@ -141,7 +141,8 @@ export default function StudentsTable({ handleAddStudent, isDash }: Props) {
       id: 0,
       name: '',
       subname: '',
-      responsible: ''
+      responsible: '',
+      birthDate: new Date()
     }
   ])
 
