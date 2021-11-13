@@ -7,6 +7,7 @@ export type StudentProp = {
   email?: string
   city?: string
   receiveINSS?: boolean
+  birthDate: Date
 }
 
 export type FamilyMemberProp = {
