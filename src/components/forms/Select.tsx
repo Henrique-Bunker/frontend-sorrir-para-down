@@ -15,13 +15,21 @@ type Props = {
   hint?: string
   id: string
   values: ValueProps[]
+  handler: (value: string) => void
 }
 
-export default function SelectLabels({ label, hint, id, values }: Props) {
+export default function SelectLabels({
+  label,
+  hint,
+  id,
+  values,
+  handler
+}: Props) {
   const [value, setValue] = React.useState('')
 
   const handleChange = (event: SelectChangeEvent) => {
     setValue(event.target.value)
+    handler(event.target.value)
   }
 
   return (
