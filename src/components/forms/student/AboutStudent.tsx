@@ -9,7 +9,8 @@ type Props = {
   handlePhone: (phone: string) => void
   handleBirth: (date: Date) => void
   handleAssociate: (date: Date) => void
-  handleIndd: (value: boolean) => void
+  handleInss: (value: boolean) => void
+  handleApae: (value: boolean) => void
 }
 
 type ValueProps = {
@@ -17,7 +18,7 @@ type ValueProps = {
   value: boolean
 }
 
-const INSS_VALUES: ValueProps[] = [
+const YES_NO_VALUES: ValueProps[] = [
   {
     label: 'Sim',
     value: true
@@ -32,7 +33,8 @@ const AboutStudent = ({
   handlePhone,
   handleBirth,
   handleAssociate,
-  handleIndd
+  handleInss,
+  handleApae
 }: Props) => {
   return (
     <>
@@ -110,7 +112,35 @@ const AboutStudent = ({
         </Grid>
         {/* LINK - INSS */}
         <Grid item xs={3}>
-          <RadioRow label="INSS" values={INSS_VALUES} handler={handleIndd} />
+          <RadioRow label="INSS" values={YES_NO_VALUES} handler={handleInss} />
+        </Grid>
+        {/* LINK - APAE */}
+        <Grid item xs={3}>
+          <RadioRow label="APAE" values={YES_NO_VALUES} handler={handleApae} />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          {/* LINK - School */}
+          <TextField
+            required
+            id="studentSchool"
+            name="studentSchool"
+            label="Escola"
+            fullWidth
+            autoComplete="student-school"
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          {/* LINK - Serie */}
+          <TextField
+            required
+            id="studentSerie"
+            name="studentSerie"
+            label="Serie"
+            fullWidth
+            autoComplete="student-serie"
+            variant="standard"
+          />
         </Grid>
       </Grid>
     </>

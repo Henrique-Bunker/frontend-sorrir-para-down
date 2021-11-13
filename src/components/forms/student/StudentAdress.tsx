@@ -1,6 +1,26 @@
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import { Chip, Divider } from '@mui/material'
+import Select from '../Select'
+
+const HOUSE_VALUES = [
+  {
+    label: 'Propria',
+    value: 'proprieatary'
+  },
+  {
+    label: 'Alugada',
+    value: 'rent'
+  },
+  {
+    label: 'Cedida',
+    value: 'given'
+  },
+  {
+    label: 'Outros',
+    value: 'others'
+  }
+]
 
 const StudentAdress = () => (
   <>
@@ -69,19 +89,11 @@ const StudentAdress = () => (
         />
       </Grid>
       {/* LINK - House  */}
-      <Grid item xs={6}>
-        <TextField
-          required
-          id="house"
-          name="house"
-          label="Casa"
-          fullWidth
-          autoComplete="shipping address-line1"
-          variant="standard"
-        />
+      <Grid item xs={4}>
+        <Select id="house" label="Casa" values={HOUSE_VALUES} />
       </Grid>
       {/* LINK - Rent  */}
-      <Grid item xs={6}>
+      <Grid item xs={3}>
         <TextField
           required
           id="rentValue"
