@@ -3,14 +3,37 @@ import TextField from '@mui/material/TextField'
 import Phone from 'components/forms/Phone'
 import { Chip, Divider } from '@mui/material'
 import Date from 'components/forms/Date'
+import RadioRow from '../RadioRow'
 
 type Props = {
   handlePhone: (phone: string) => void
   handleBirth: (date: Date) => void
   handleAssociate: (date: Date) => void
+  handleIndd: (value: boolean) => void
 }
 
-const AboutStudent = ({ handlePhone, handleBirth, handleAssociate }: Props) => {
+type ValueProps = {
+  label: string
+  value: boolean
+}
+
+const INSS_VALUES: ValueProps[] = [
+  {
+    label: 'Sim',
+    value: true
+  },
+  {
+    label: 'Não',
+    value: false
+  }
+]
+
+const AboutStudent = ({
+  handlePhone,
+  handleBirth,
+  handleAssociate,
+  handleIndd
+}: Props) => {
   return (
     <>
       <Divider variant="middle" sx={{ alignItems: 'center' }}>
@@ -49,6 +72,10 @@ const AboutStudent = ({ handlePhone, handleBirth, handleAssociate }: Props) => {
             handler={handleBirth}
           />
         </Grid>
+        {/* LINK - Phone */}
+        <Grid item xs={12} sm={4}>
+          <Phone handler={handlePhone} />
+        </Grid>
         {/* LINK - Email */}
         <Grid item xs={12} sm={5}>
           <TextField
@@ -61,10 +88,6 @@ const AboutStudent = ({ handlePhone, handleBirth, handleAssociate }: Props) => {
             variant="standard"
           />
         </Grid>
-        {/* LINK - Phone */}
-        <Grid item xs={12} sm={4}>
-          <Phone handler={handlePhone} />
-        </Grid>
         {/* LINK - Association */}
         <Grid item xs={12} sm={3}>
           <Date
@@ -74,7 +97,7 @@ const AboutStudent = ({ handlePhone, handleBirth, handleAssociate }: Props) => {
           />
         </Grid>
         {/* LINK - Responsable */}
-        <Grid item xs={12}>
+        <Grid item xs={6}>
           <TextField
             required
             id="responsable"
@@ -84,6 +107,10 @@ const AboutStudent = ({ handlePhone, handleBirth, handleAssociate }: Props) => {
             variant="standard"
             autoComplete="student-responsable"
           />
+        </Grid>
+        {/* LINK - INSS */}
+        <Grid item xs={3}>
+          <RadioRow label="INSS" values={INSS_VALUES} handler={handleIndd} />
         </Grid>
       </Grid>
     </>

@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import { v4 as uuid_v4 } from 'uuid'
 import { FamilyMemberProp } from 'types/Student'
+import NumericInput from 'material-ui-numeric-input'
 
 type Props = {
   onSubmit: (member: FamilyMemberProp) => void
@@ -16,21 +17,25 @@ type Props = {
 
 export default function AddComposition({ onSubmit }: Props) {
   const [open, setOpen] = React.useState(true)
+  const [income, setIncome] = React.useState(0)
   const fullWidth = true
   const maxWidth: DialogProps['maxWidth'] = 'md'
+
+  const handleIncome = (value: number) => {
+    setIncome(value)
+  }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
     const memberName = data.get('name') as string
     const age = data.get('age') as string
-    const income = data.get('income') as string
 
     onSubmit({
       id: uuid_v4(),
       name: memberName,
       age: parseInt(age),
-      income: parseInt(income)
+      income: income
     })
     setOpen(false)
   }
@@ -83,16 +88,16 @@ export default function AddComposition({ onSubmit }: Props) {
                 shrink: true
               }}
             />
-            <TextField
-              required
-              id="outlined-number"
-              label="Renda"
-              type="number"
-              size="small"
+            <NumericInput
+              id="income"
               name="income"
-              InputLabelProps={{
-                shrink: true
-              }}
+              precision={2}
+              decimalChar=","
+              thousandChar="."
+              label="Renda"
+              size="small"
+              onChange={(event) => handleIncome(event.target.value as number)}
+              variant="outlined"
             />
             <Button type="submit" autoFocus>
               Adicionar

@@ -23,6 +23,7 @@ const AddStudent = ({ handleCloseTab }: Props) => {
   const [phone, setPhone] = React.useState('')
   const [birthDate, setBirthDate] = React.useState<Date>()
   const [assocDate, setAssocDate] = React.useState<Date>()
+  const [isINSS, setIsINSS] = React.useState(false)
   const [motherBirthDate, setMotherBirthDate] = React.useState<Date>()
   const [fatherBirthDate, setFatherBirthDate] = React.useState<Date>()
   const [incomeFather, setIncomeFather] = React.useState<number>()
@@ -31,6 +32,11 @@ const AddStudent = ({ handleCloseTab }: Props) => {
   //NOTE handlePhone
   const handlePhone = (studentPhone: string) => {
     setPhone(studentPhone)
+  }
+
+  //NOTE handleINSS
+  const handleInss = (isInss: boolean) => {
+    setIsINSS(isInss)
   }
 
   //NOTE handleBirthDate
@@ -73,7 +79,7 @@ const AddStudent = ({ handleCloseTab }: Props) => {
         email: data.get('email'),
         city: data.get('city'),
         associationData: assocDate,
-        receiveINSS: data.get('receiveINSS'),
+        receiveINSS: isINSS,
         birthDate: birthDate,
         motherName: data.get('motherName'),
         motherDN: motherBirthDate,
@@ -158,6 +164,7 @@ const AddStudent = ({ handleCloseTab }: Props) => {
             handlePhone={handlePhone}
             handleBirth={handleBirthDate}
             handleAssociate={handleAssocDate}
+            handleIndd={handleInss}
           />
           <StudentAdress />
           <StudentMother
