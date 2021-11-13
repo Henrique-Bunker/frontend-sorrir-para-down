@@ -2,6 +2,7 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import { Chip, Divider } from '@mui/material'
 import Select from '../Select'
+import NumericInput from 'material-ui-numeric-input'
 
 const HOUSE_VALUES = [
   {
@@ -22,7 +23,12 @@ const HOUSE_VALUES = [
   }
 ]
 
-const StudentAdress = () => (
+type Props = {
+  handleValue: (income: number) => void
+  handleResidanceType: (type: string) => void
+}
+
+const StudentAdress = ({ handleValue, handleResidanceType }: Props) => (
   <>
     <Divider variant="middle" sx={{ alignItems: 'center' }}>
       <Chip label="Endereço" />
@@ -90,17 +96,24 @@ const StudentAdress = () => (
       </Grid>
       {/* LINK - House  */}
       <Grid item xs={4}>
-        <Select id="house" label="Casa" values={HOUSE_VALUES} />
+        <Select
+          id="house"
+          label="Casa"
+          values={HOUSE_VALUES}
+          handler={handleResidanceType}
+        />
       </Grid>
       {/* LINK - Rent  */}
       <Grid item xs={3}>
-        <TextField
+        <NumericInput
           required
           id="rentValue"
           name="rentValue"
+          precision={2}
+          decimalChar=","
+          thousandChar="."
           label="Valor Aluguel"
-          fullWidth
-          autoComplete="shipping address-line1"
+          onChange={(event) => handleValue(event.target.value as number)}
           variant="standard"
         />
       </Grid>
