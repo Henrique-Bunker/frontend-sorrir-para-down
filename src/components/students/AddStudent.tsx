@@ -7,6 +7,7 @@ import AboutStudent from 'components/forms/student/AboutStudent'
 import StudentAdress from 'components/forms/student/StudentAdress'
 import StudentMother from 'components/forms/student/StudentMother'
 import StudentFather from 'components/forms/student/StudentFather'
+import StudentOthers from 'components/forms/student/StudentOthers'
 import FamilyComopition from 'components/forms/student/FamilyComposition'
 import { Fab, Link, Paper } from '@mui/material'
 import ClearIcon from '@mui/icons-material/Clear'
@@ -24,6 +25,7 @@ const AddStudent = ({ handleCloseTab }: Props) => {
   const [birthDate, setBirthDate] = React.useState<Date>()
   const [assocDate, setAssocDate] = React.useState<Date>()
   const [isINSS, setIsINSS] = React.useState(false)
+  const [isAPAE, setIsAPAE] = React.useState(false)
   const [motherBirthDate, setMotherBirthDate] = React.useState<Date>()
   const [fatherBirthDate, setFatherBirthDate] = React.useState<Date>()
   const [incomeFather, setIncomeFather] = React.useState<number>()
@@ -37,6 +39,11 @@ const AddStudent = ({ handleCloseTab }: Props) => {
   //NOTE handleINSS
   const handleInss = (isInss: boolean) => {
     setIsINSS(isInss)
+  }
+
+  //NOTE handleAPAE
+  const handleAPAE = (isInss: boolean) => {
+    setIsAPAE(isInss)
   }
 
   //NOTE handleBirthDate
@@ -59,12 +66,22 @@ const AddStudent = ({ handleCloseTab }: Props) => {
     setFatherBirthDate(birthDate)
   }
 
+  //NOTE getFamilyIncome
+  const getFamilyIncome = () => {
+    let sumIncome = 0
+    sumIncome += incomeFather ? incomeFather : 0
+    sumIncome += incomeMother ? incomeMother : 0
+    composition.map((member) => {
+      sumIncome += member.income ? member.income : 0
+    })
+    return sumIncome
+  }
+
   // NOTE handleSubmit
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    const totalIncome = getFamilyIncome()
     const data = new FormData(event.currentTarget)
-
-    console.log('DATA QUE VEM: ' + birthDate)
 
     // ANCHOR Post
     // TODO handle null | undefined | values
@@ -80,7 +97,10 @@ const AddStudent = ({ handleCloseTab }: Props) => {
         city: data.get('city'),
         associationData: assocDate,
         receiveINSS: isINSS,
+        isAPAE: isAPAE,
         birthDate: birthDate,
+        school: data.get('studentSchool'),
+        schoolSerie: data.get('studentSerie'),
         motherName: data.get('motherName'),
         motherDN: motherBirthDate,
         motherWorkplace: data.get('motherWorkplace'),
@@ -93,12 +113,9 @@ const AddStudent = ({ handleCloseTab }: Props) => {
         fatherIncome: incomeFather,
         fatherSchooling: data.get('fatherSchooling'),
         familyComposition: composition,
-        familyIncome: data.get('familyIncome'),
+        familyIncome: totalIncome,
         residence: data.get('residence'),
         rentValue: data.get('rentValue'),
-        isAPAE: data.get('isAPAE'),
-        school: data.get('school'),
-        schoolSerie: data.get('schoolSerie'),
         CEI: data.get('CEI'),
         othersActivities: data.get('othersActivities'),
         obs: data.get('obs')
@@ -164,7 +181,8 @@ const AddStudent = ({ handleCloseTab }: Props) => {
             handlePhone={handlePhone}
             handleBirth={handleBirthDate}
             handleAssociate={handleAssocDate}
-            handleIndd={handleInss}
+            handleInss={handleInss}
+            handleApae={handleAPAE}
           />
           <StudentAdress />
           <StudentMother
@@ -176,6 +194,7 @@ const AddStudent = ({ handleCloseTab }: Props) => {
             handleBirth={handleFatherBirthDate}
           />
           <FamilyComopition handleComposition={handleAddComposition} />
+          <StudentOthers />
           <Grid container spacing={3} justifyContent="center">
             <Button
               type="submit"
