@@ -6,9 +6,11 @@ import Date from 'components/forms/Date'
 
 type Props = {
   handlePhone: (phone: string) => void
+  handleBirth: (date: Date) => void
+  handleAssociate: (date: Date) => void
 }
 
-const AboutStudent = ({ handlePhone }: Props) => {
+const AboutStudent = ({ handlePhone, handleBirth, handleAssociate }: Props) => {
   return (
     <>
       <Divider variant="middle" sx={{ alignItems: 'center' }}>
@@ -41,7 +43,11 @@ const AboutStudent = ({ handlePhone }: Props) => {
         </Grid>
         {/* LINK - BirthDate */}
         <Grid item xs={12} sm={3}>
-          <Date txtLabel="Data Nasc" componentName="birthDate" />
+          <Date
+            txtLabel="Data Nasc"
+            componentName="birthDate"
+            handler={handleBirth}
+          />
         </Grid>
         {/* LINK - Email */}
         <Grid item xs={12} sm={5}>
@@ -61,7 +67,11 @@ const AboutStudent = ({ handlePhone }: Props) => {
         </Grid>
         {/* LINK - Association */}
         <Grid item xs={12} sm={3}>
-          <Date txtLabel="Inicio Associação" componentName="assocDate" />
+          <Date
+            txtLabel="Inicio Associação"
+            componentName="assocDate"
+            handler={handleAssociate}
+          />
         </Grid>
         {/* LINK - Responsable */}
         <Grid item xs={12}>

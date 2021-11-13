@@ -2,8 +2,14 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import { Chip, Divider } from '@mui/material'
 import Date from 'components/forms/Date'
+import NumericInput from 'material-ui-numeric-input'
 
-const StudentFather = () => (
+type Props = {
+  handleIncome: (input: number) => void
+  handleBirth: (date: Date) => void
+}
+
+const StudentFather = ({ handleIncome, handleBirth }: Props) => (
   <>
     <Divider variant="middle" sx={{ alignItems: 'center' }}>
       <Chip label="Dados do Pai" />
@@ -35,10 +41,14 @@ const StudentFather = () => (
       </Grid>
       {/* LINK - Father DN */}
       <Grid item xs={12} sm={3}>
-        <Date txtLabel="Data Nasc" componentName="fatherBirthDate" />
+        <Date
+          txtLabel="Data Nasc"
+          componentName="fatherBirthDate"
+          handler={handleBirth}
+        />
       </Grid>
       {/* LINK - Father Workplace */}
-      <Grid item xs={12} sm={5}>
+      <Grid item xs={12} sm={4}>
         <TextField
           required
           id="fatherWorkplace"
@@ -51,18 +61,20 @@ const StudentFather = () => (
       </Grid>
       {/* LINK - Father Income */}
       <Grid item xs={12} sm={4}>
-        <TextField
-          required
+        <NumericInput
+          autoComplete="income"
           id="fatherIncome"
           name="fatherIncome"
+          precision={2}
+          decimalChar=","
+          thousandChar="."
           label="Renda"
-          fullWidth
-          autoComplete="family-name"
+          onChange={(event) => handleIncome(event.target.value as number)}
           variant="standard"
         />
       </Grid>
       {/* LINK - Father Schooling */}
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={4}>
         <TextField
           required
           id="fatherSchooling"

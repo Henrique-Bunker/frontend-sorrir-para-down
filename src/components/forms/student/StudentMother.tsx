@@ -2,8 +2,14 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import { Chip, Divider } from '@mui/material'
 import Date from 'components/forms/Date'
+import NumericInput from 'material-ui-numeric-input'
 
-const StudentMother = () => (
+type Props = {
+  handleIncome: (input: number) => void
+  handleBirth: (date: Date) => void
+}
+
+const StudentMother = ({ handleIncome, handleBirth }: Props) => (
   <>
     <Divider variant="middle" sx={{ alignItems: 'center' }}>
       <Chip label="Dados da Mãe" />
@@ -35,7 +41,11 @@ const StudentMother = () => (
       </Grid>
       {/* LINK - Mother DN */}
       <Grid item xs={12} sm={3}>
-        <Date txtLabel="Data Nasc" componentName="motherBirthDate" />
+        <Date
+          txtLabel="Data Nasc"
+          componentName="motherBirthDate"
+          handler={handleBirth}
+        />
       </Grid>
       {/* LINK - Mother Workplace */}
       <Grid item xs={12} sm={5}>
@@ -51,28 +61,35 @@ const StudentMother = () => (
       </Grid>
       {/* LINK - Mother Income */}
       <Grid item xs={12} sm={4}>
-        <TextField
-          required
+        <NumericInput
+          autoComplete="income"
           id="motherIncome"
           name="motherIncome"
+          precision={2}
+          decimalChar=","
+          thousandChar="."
           label="Renda"
-          fullWidth
+          onChange={(event) => handleIncome(event.target.value as number)}
           variant="standard"
         />
       </Grid>
       {/* LINK - Mother age at become mother */}
       <Grid item xs={12} sm={3}>
-        <TextField
-          required
-          id="motherAgeHaveChild"
-          name="motherAgeHaveChild"
+        <NumericInput
+          id="motherAgeChildBorn"
+          name="motherAgeChildBorn"
+          precision={0}
+          decimalChar=","
+          thousandChar="."
           label="Idade que teve filho"
-          fullWidth
+          onChange={() => {
+            return
+          }}
           variant="standard"
         />
       </Grid>
       {/* LINK - Mother Schooling */}
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={4}>
         <TextField
           required
           id="motherSchooling"
