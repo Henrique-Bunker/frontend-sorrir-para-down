@@ -26,14 +26,38 @@ const AddStudent = ({ handleCloseTab }: Props) => {
   const [assocDate, setAssocDate] = React.useState<Date>()
   const [isINSS, setIsINSS] = React.useState(false)
   const [isAPAE, setIsAPAE] = React.useState(false)
+  const [residance, setResidance] = React.useState<string>()
+  const [rentValue, setRentValue] = React.useState(0.0)
   const [motherBirthDate, setMotherBirthDate] = React.useState<Date>()
   const [fatherBirthDate, setFatherBirthDate] = React.useState<Date>()
   const [incomeFather, setIncomeFather] = React.useState<number>()
   const [incomeMother, setIncomeMother] = React.useState<number>()
+  const [obs, setObs] = React.useState<string>()
+  const [activities, setActivities] = React.useState<string>()
 
   //NOTE handlePhone
   const handlePhone = (studentPhone: string) => {
     setPhone(studentPhone)
+  }
+
+  //NOTE handleObservation
+  const handleObservation = (input: string) => {
+    setObs(input)
+  }
+
+  //NOTE handleOtherActivities
+  const handleOtherActivities = (input: string) => {
+    setActivities(input)
+  }
+
+  //NOTE handleResidance
+  const handleResidance = (type: string) => {
+    setResidance(type)
+  }
+
+  //NOTE handleRentValue
+  const handleRentValue = (value: number) => {
+    setRentValue(value)
   }
 
   //NOTE handleINSS
@@ -114,11 +138,11 @@ const AddStudent = ({ handleCloseTab }: Props) => {
         fatherSchooling: data.get('fatherSchooling'),
         familyComposition: composition,
         familyIncome: totalIncome,
-        residence: data.get('residence'),
-        rentValue: data.get('rentValue'),
-        CEI: data.get('CEI'),
-        othersActivities: data.get('othersActivities'),
-        obs: data.get('obs')
+        residence: residance,
+        rentValue: rentValue,
+        CEI: data.get('inputCei'),
+        othersActivities: activities,
+        obs: obs
       })
       .then(() => {
         console.log({ phone })
@@ -184,7 +208,10 @@ const AddStudent = ({ handleCloseTab }: Props) => {
             handleInss={handleInss}
             handleApae={handleAPAE}
           />
-          <StudentAdress />
+          <StudentAdress
+            handleValue={handleRentValue}
+            handleResidanceType={handleResidance}
+          />
           <StudentMother
             handleIncome={handleAddMotherIncome}
             handleBirth={handleMotherBirthDate}
@@ -194,7 +221,10 @@ const AddStudent = ({ handleCloseTab }: Props) => {
             handleBirth={handleFatherBirthDate}
           />
           <FamilyComopition handleComposition={handleAddComposition} />
-          <StudentOthers />
+          <StudentOthers
+            handleObs={handleObservation}
+            handleAct={handleOtherActivities}
+          />
           <Grid container spacing={3} justifyContent="center">
             <Button
               type="submit"
