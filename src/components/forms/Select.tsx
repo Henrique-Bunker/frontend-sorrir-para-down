@@ -18,10 +18,10 @@ type Props = {
 }
 
 export default function SelectLabels({ label, hint, id, values }: Props) {
-  const [age, setAge] = React.useState('')
+  const [value, setValue] = React.useState('')
 
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value)
+    setValue(event.target.value)
   }
 
   return (
@@ -30,10 +30,11 @@ export default function SelectLabels({ label, hint, id, values }: Props) {
         <InputLabel>{label}</InputLabel>
         <Select
           id={id}
-          value={age}
+          value={value}
           label={label}
           onChange={handleChange}
           fullWidth
+          required
         >
           {values.map((item, index) => (
             <MenuItem key={index} value={item.value}>
