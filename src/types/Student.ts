@@ -21,6 +21,7 @@ export type StudentProp = {
   rentValue: number
   // Mother Section
   motherName: string
+  motherSubName: string
   motherDN: Date
   motherWorkplace: string
   motherIncome: number
@@ -28,6 +29,7 @@ export type StudentProp = {
   motherSchooling: string
   // Mother Section
   fatherName: string
+  fatherSubName: string
   fatherDN: Date
   fatherWorkplace: string
   fatherIncome: number
