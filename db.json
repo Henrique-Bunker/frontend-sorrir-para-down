@@ -51,14 +51,12 @@
     {
       "username": "admin",
       "password": "admin",
-      "active": true,
       "role": "adm",
       "id": 0
     },
     {
       "username": "supervisor",
       "password": "12345678",
-      "active": true,
       "role": "sup",
       "id": 1
     }
