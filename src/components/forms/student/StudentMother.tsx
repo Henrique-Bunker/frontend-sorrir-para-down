@@ -3,13 +3,15 @@ import TextField from '@mui/material/TextField'
 import { Chip, Divider } from '@mui/material'
 import Date from 'components/forms/Date'
 import NumericInput from 'material-ui-numeric-input'
+import { StudentProp } from 'types/Student'
 
 type Props = {
   handleIncome: (input: number) => void
   handleBirth: (date: Date) => void
+  props?: StudentProp
 }
 
-const StudentMother = ({ handleIncome, handleBirth }: Props) => (
+const StudentMother = ({ handleIncome, handleBirth, props }: Props) => (
   <>
     <Divider variant="middle" sx={{ alignItems: 'center' }}>
       <Chip label="Dados da Mãe" />
@@ -25,6 +27,7 @@ const StudentMother = ({ handleIncome, handleBirth }: Props) => (
           fullWidth
           autoComplete="given-name"
           variant="standard"
+          value={props?.motherName}
         />
       </Grid>
       {/* LINK - Mother Subname */}
@@ -37,6 +40,7 @@ const StudentMother = ({ handleIncome, handleBirth }: Props) => (
           fullWidth
           autoComplete="family-name"
           variant="standard"
+          //value={props?.motherSubname}
         />
       </Grid>
       {/* LINK - Mother DN */}
@@ -45,6 +49,7 @@ const StudentMother = ({ handleIncome, handleBirth }: Props) => (
           txtLabel="Data Nasc"
           componentName="motherBirthDate"
           handler={handleBirth}
+          initialValue={props?.motherDN}
         />
       </Grid>
       {/* LINK - Mother Workplace */}
@@ -57,6 +62,7 @@ const StudentMother = ({ handleIncome, handleBirth }: Props) => (
           fullWidth
           autoComplete="mother-workplace"
           variant="standard"
+          value={props?.motherWorkplace}
         />
       </Grid>
       {/* LINK - Mother Income */}
@@ -71,6 +77,7 @@ const StudentMother = ({ handleIncome, handleBirth }: Props) => (
           label="Renda"
           onChange={(event) => handleIncome(event.target.value as number)}
           variant="standard"
+          value={props?.motherIncome}
         />
       </Grid>
       {/* LINK - Mother age at become mother */}
@@ -86,6 +93,7 @@ const StudentMother = ({ handleIncome, handleBirth }: Props) => (
             return
           }}
           variant="standard"
+          value={props?.motherAgeChildBorn}
         />
       </Grid>
       {/* LINK - Mother Schooling */}
@@ -98,6 +106,7 @@ const StudentMother = ({ handleIncome, handleBirth }: Props) => (
           fullWidth
           autoComplete="mother-schooling"
           variant="standard"
+          value={props?.motherSchooling}
         />
       </Grid>
     </Grid>

@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField'
 import { Chip, Divider } from '@mui/material'
 import Select from '../Select'
 import NumericInput from 'material-ui-numeric-input'
+import { StudentProp } from 'types/Student'
 
 const HOUSE_VALUES = [
   {
@@ -26,9 +27,10 @@ const HOUSE_VALUES = [
 type Props = {
   handleValue: (income: number) => void
   handleResidanceType: (type: string) => void
+  props?: StudentProp
 }
 
-const StudentAdress = ({ handleValue, handleResidanceType }: Props) => (
+const StudentAdress = ({ handleValue, handleResidanceType, props }: Props) => (
   <>
     <Divider variant="middle" sx={{ alignItems: 'center' }}>
       <Chip label="Endereço" />
@@ -44,6 +46,7 @@ const StudentAdress = ({ handleValue, handleResidanceType }: Props) => (
           fullWidth
           autoComplete="shipping address-line1"
           variant="standard"
+          value={props?.street}
         />
       </Grid>
       {/* LINK - District */}
@@ -56,6 +59,7 @@ const StudentAdress = ({ handleValue, handleResidanceType }: Props) => (
           fullWidth
           autoComplete="shipping address-line1"
           variant="standard"
+          value={props?.district}
         />
       </Grid>
       {/* LINK - City  */}
@@ -68,6 +72,7 @@ const StudentAdress = ({ handleValue, handleResidanceType }: Props) => (
           fullWidth
           autoComplete="shipping address-line1"
           variant="standard"
+          value={props?.city}
         />
       </Grid>
       {/* LINK - State  */}
@@ -80,6 +85,7 @@ const StudentAdress = ({ handleValue, handleResidanceType }: Props) => (
           fullWidth
           autoComplete="shipping address-line1"
           variant="standard"
+          value={props?.state}
         />
       </Grid>
       {/* LINK - Zipcode  */}
@@ -92,6 +98,7 @@ const StudentAdress = ({ handleValue, handleResidanceType }: Props) => (
           fullWidth
           autoComplete="shipping address-line1"
           variant="standard"
+          value={props?.zipcode}
         />
       </Grid>
       {/* LINK - House  */}
@@ -101,6 +108,7 @@ const StudentAdress = ({ handleValue, handleResidanceType }: Props) => (
           label="Casa"
           values={HOUSE_VALUES}
           handler={handleResidanceType}
+          inputValue={props?.residence}
         />
       </Grid>
       {/* LINK - Rent  */}
@@ -115,6 +123,7 @@ const StudentAdress = ({ handleValue, handleResidanceType }: Props) => (
           label="Valor Aluguel"
           onChange={(event) => handleValue(event.target.value as number)}
           variant="standard"
+          value={props?.rentValue}
         />
       </Grid>
     </Grid>

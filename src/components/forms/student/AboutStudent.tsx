@@ -4,13 +4,16 @@ import Phone from 'components/forms/Phone'
 import { Chip, Divider } from '@mui/material'
 import Date from 'components/forms/Date'
 import RadioRow from '../RadioRow'
+import { StudentProp } from 'types/Student'
 
 type Props = {
   handlePhone: (phone: string) => void
   handleBirth: (date: Date) => void
+  birthDate?: Date
   handleAssociate: (date: Date) => void
   handleInss: (value: boolean) => void
   handleApae: (value: boolean) => void
+  props?: StudentProp
 }
 
 type ValueProps = {
@@ -32,9 +35,11 @@ const YES_NO_VALUES: ValueProps[] = [
 const AboutStudent = ({
   handlePhone,
   handleBirth,
+  birthDate,
   handleAssociate,
   handleInss,
-  handleApae
+  handleApae,
+  props
 }: Props) => {
   return (
     <>
@@ -52,6 +57,7 @@ const AboutStudent = ({
             fullWidth
             autoComplete="student-name"
             variant="standard"
+            value={props?.name}
           />
         </Grid>
         {/* LINK - Subname */}
@@ -64,6 +70,7 @@ const AboutStudent = ({
             fullWidth
             autoComplete="sub-name"
             variant="standard"
+            value={props?.subname}
           />
         </Grid>
         {/* LINK - BirthDate */}
@@ -72,11 +79,12 @@ const AboutStudent = ({
             txtLabel="Data Nasc"
             componentName="birthDate"
             handler={handleBirth}
+            initialValue={birthDate}
           />
         </Grid>
         {/* LINK - Phone */}
         <Grid item xs={12} sm={4}>
-          <Phone handler={handlePhone} />
+          <Phone handler={handlePhone} props={props} />
         </Grid>
         {/* LINK - Email */}
         <Grid item xs={12} sm={5}>
@@ -88,6 +96,7 @@ const AboutStudent = ({
             fullWidth
             autoComplete="email-form"
             variant="standard"
+            value={props?.email}
           />
         </Grid>
         {/* LINK - Association */}
@@ -96,6 +105,7 @@ const AboutStudent = ({
             txtLabel="Inicio Associação"
             componentName="assocDate"
             handler={handleAssociate}
+            initialValue={props?.associationData}
           />
         </Grid>
         {/* LINK - Responsable */}
@@ -108,15 +118,26 @@ const AboutStudent = ({
             fullWidth
             variant="standard"
             autoComplete="student-responsable"
+            value={props?.responsible}
           />
         </Grid>
         {/* LINK - INSS */}
         <Grid item xs={3}>
-          <RadioRow label="INSS" values={YES_NO_VALUES} handler={handleInss} />
+          <RadioRow
+            label="INSS"
+            values={YES_NO_VALUES}
+            handler={handleInss}
+            initialValue={props?.receiveINSS}
+          />
         </Grid>
         {/* LINK - APAE */}
         <Grid item xs={3}>
-          <RadioRow label="APAE" values={YES_NO_VALUES} handler={handleApae} />
+          <RadioRow
+            label="APAE"
+            values={YES_NO_VALUES}
+            handler={handleApae}
+            initialValue={props?.isAPAE}
+          />
         </Grid>
         <Grid item xs={12} sm={6}>
           {/* LINK - School */}
@@ -128,6 +149,7 @@ const AboutStudent = ({
             fullWidth
             autoComplete="student-school"
             variant="standard"
+            value={props?.school}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -140,6 +162,7 @@ const AboutStudent = ({
             fullWidth
             autoComplete="student-serie"
             variant="standard"
+            value={props?.schoolSerie}
           />
         </Grid>
       </Grid>

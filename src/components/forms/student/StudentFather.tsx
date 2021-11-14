@@ -3,13 +3,15 @@ import TextField from '@mui/material/TextField'
 import { Chip, Divider } from '@mui/material'
 import Date from 'components/forms/Date'
 import NumericInput from 'material-ui-numeric-input'
+import { StudentProp } from 'types/Student'
 
 type Props = {
   handleIncome: (input: number) => void
   handleBirth: (date: Date) => void
+  props?: StudentProp
 }
 
-const StudentFather = ({ handleIncome, handleBirth }: Props) => (
+const StudentFather = ({ handleIncome, handleBirth, props }: Props) => (
   <>
     <Divider variant="middle" sx={{ alignItems: 'center' }}>
       <Chip label="Dados do Pai" />
@@ -25,6 +27,7 @@ const StudentFather = ({ handleIncome, handleBirth }: Props) => (
           fullWidth
           autoComplete="given-name"
           variant="standard"
+          value={props?.fatherName}
         />
       </Grid>
       {/* LINK - Father Subname */}
@@ -37,6 +40,7 @@ const StudentFather = ({ handleIncome, handleBirth }: Props) => (
           fullWidth
           autoComplete="family-name"
           variant="standard"
+          //value={props?.fatherSubName}
         />
       </Grid>
       {/* LINK - Father DN */}
@@ -45,6 +49,7 @@ const StudentFather = ({ handleIncome, handleBirth }: Props) => (
           txtLabel="Data Nasc"
           componentName="fatherBirthDate"
           handler={handleBirth}
+          initialValue={props?.fatherDN}
         />
       </Grid>
       {/* LINK - Father Workplace */}
@@ -57,6 +62,7 @@ const StudentFather = ({ handleIncome, handleBirth }: Props) => (
           fullWidth
           autoComplete="family-name"
           variant="standard"
+          value={props?.fatherWorkplace}
         />
       </Grid>
       {/* LINK - Father Income */}
@@ -71,6 +77,7 @@ const StudentFather = ({ handleIncome, handleBirth }: Props) => (
           label="Renda"
           onChange={(event) => handleIncome(event.target.value as number)}
           variant="standard"
+          value={props?.fatherIncome}
         />
       </Grid>
       {/* LINK - Father Schooling */}
@@ -83,6 +90,7 @@ const StudentFather = ({ handleIncome, handleBirth }: Props) => (
           fullWidth
           autoComplete="father-schooling"
           variant="standard"
+          value={props?.fatherSchooling}
         />
       </Grid>
     </Grid>

@@ -2,13 +2,15 @@ import { Chip, Divider } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import MultilineText from '../MultilineText'
+import { StudentProp } from 'types/Student'
 
 type Props = {
   handleObs: (value: string) => void
   handleAct: (value: string) => void
+  props?: StudentProp
 }
 
-const StudentOthers = ({ handleObs, handleAct }: Props) => (
+const StudentOthers = ({ handleObs, handleAct, props }: Props) => (
   <>
     <Divider variant="middle" sx={{ alignItems: 'center' }}>
       <Chip label="Outros" />
@@ -22,6 +24,7 @@ const StudentOthers = ({ handleObs, handleAct }: Props) => (
             label="Outros"
             rows={5}
             handler={handleAct}
+            inputValue={props?.othersActivities}
           />
         </Grid>
       </Grid>
@@ -33,6 +36,7 @@ const StudentOthers = ({ handleObs, handleAct }: Props) => (
             label="Obs"
             rows={2}
             handler={handleObs}
+            inputValue={props?.obs}
           />
         </Grid>
         {/* LINK -  CEI*/}
@@ -44,6 +48,7 @@ const StudentOthers = ({ handleObs, handleAct }: Props) => (
             label="CEI"
             fullWidth
             variant="standard"
+            value={props?.CEI}
           />
         </Grid>
       </Grid>
