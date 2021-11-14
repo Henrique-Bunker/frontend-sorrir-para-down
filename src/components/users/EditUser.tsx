@@ -3,22 +3,38 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
-import { Fab, Link, Paper } from '@mui/material'
-import ClearIcon from '@mui/icons-material/Clear'
+import { Paper } from '@mui/material'
 import Container from '@mui/material/Container'
 import { UserProps } from 'types/User'
 import axios from 'axios'
-import { Chip, Divider } from '@mui/material'
 import TextField from '@mui/material/TextField'
-// import Select from 'components/forms/Select'
+import SelectRole from 'components/forms/SelectRole'
 
 type Props = {
   handleCloseTab: () => void
   userDate: UserProps
 }
 
+const SELECT_VALUES = [
+  {
+    label: 'Usuario',
+    value: 'usr'
+  },
+  {
+    label: 'Supervisor',
+    value: 'sup'
+  },
+  {
+    label: 'Administrador',
+    value: 'adm'
+  }
+]
+
 const EditStudent = ({ handleCloseTab, userDate }: Props) => {
   // const [isAPAE, setIsAPAE] = React.useState(userDate?.isAPAE ? true : false)
+  const [permission, setPermission] = React.useState<string>(
+    userDate?.role ? userDate.role : ''
+  )
   const [user, setUser] = React.useState<string>(
     userDate?.username && userDate.username
   )
@@ -26,6 +42,10 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
   const [password, setPassword] = React.useState<string>(
     userDate?.password && userDate.password
   )
+
+  const handlePermission = (value: string) => {
+    setPermission(value)
+  }
 
   // NOTE handleSubmit
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -37,7 +57,7 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
         username: user,
         password: password,
         active: true,
-        role: 2
+        role: permission
       })
       .then(() => {
         window.location.reload()
@@ -61,23 +81,11 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
             sx={{ p: 3, mb: 2 }}
           >
             <Typography variant="h6" gutterBottom>
-              Editar Cadastro de {userDate.username}
+              Editar {userDate.username}
             </Typography>
-            <Link onClick={handleCloseTab}>
-              <Fab
-                size="small"
-                color="secondary"
-                sx={{ backgroundColor: 'red' }}
-              >
-                <ClearIcon />
-              </Fab>
-            </Link>
           </Grid>
-          <Divider variant="middle" sx={{ alignItems: 'center' }}>
-            <Chip label="Aluno" />
-          </Divider>
           <Grid container spacing={3} sx={{ mb: 4, mt: 2 }}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={12}>
               {/* LINK - User */}
               <TextField
                 required
@@ -92,13 +100,13 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
                 value={user}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={12}>
               {/* LINK - Password */}
               <TextField
                 required
                 id="password"
                 name="password"
-                label="Senha"
+                label="Nova Senha"
                 type="password"
                 fullWidth
                 onChange={(input) => setPassword(input.target.value as string)}
@@ -107,21 +115,50 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
                 value={password}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              {/* LINK - Password
-              <Select />
-              */}
+            <Grid item xs={12} sm={12}>
+              {/* LINK - Repeat Password */}
+              <TextField
+                required
+                id="password-repeat"
+                name="password-repeat"
+                label="Repetir nova Senha"
+                type="password"
+                fullWidth
+                onChange={(input) => setPassword(input.target.value as string)}
+                autoComplete="student-name"
+                variant="standard"
+                value={password}
+              />
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              {/* LINK - Role */}
+              <SelectRole
+                label="Permissão"
+                handler={handlePermission}
+                id="role-selector"
+                values={SELECT_VALUES}
+                inputValue={permission}
+              />
             </Grid>
           </Grid>
           <Grid container spacing={3} justifyContent="center">
+            <Button
+              variant="contained"
+              size="large"
+              color="error"
+              onClick={handleCloseTab}
+              sx={{ mt: 2, mb: 2, mr: 1 }}
+            >
+              Calcelar
+            </Button>
             <Button
               type="submit"
               variant="contained"
               size="large"
               color="success"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 2, mb: 2, ml: 1 }}
             >
-              Salvar
+              Editar
             </Button>
           </Grid>
         </Box>
