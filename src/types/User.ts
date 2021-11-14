@@ -2,6 +2,6 @@ export type UserProps = {
   id: number
   username: string
   password: string
-  role: number
+  role: string
   active: boolean
 }
