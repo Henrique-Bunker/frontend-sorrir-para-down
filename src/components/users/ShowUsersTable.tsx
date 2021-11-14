@@ -21,7 +21,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
-import ConfirmDel from 'components/ConfirmDel'
+import DelUser from './DelUser'
 import { render } from '@testing-library/react'
 import { UserProps } from 'types/User'
 import Title from '../miscellaneous/Title'
@@ -30,7 +30,7 @@ import ShowUser from './ShowUser'
 import EditUser from './EditUser'
 
 type Props = {
-  handleAddStudent?: () => void
+  handleAddUser?: () => void
   handleEdit?: (component: JSX.Element) => void
   handleClose?: () => void
   isDash?: boolean
@@ -132,8 +132,8 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
 }
 
 // SECTION Students Table
-export default function StudentsTable({
-  handleAddStudent,
+export default function ShowUsersTable({
+  handleAddUser,
   handleEdit,
   handleClose,
   isDash
@@ -147,9 +147,9 @@ export default function StudentsTable({
   // NOTE Open Del Dialog
   const openDelDialog = (user: UserProps) => {
     render(
-      <ConfirmDel
-        studentName={`${user.username}`}
-        studentID={user.id}
+      <DelUser
+        userName={`${user.username}`}
+        userID={user.id}
         openDialog={true}
       />
     )
@@ -216,7 +216,7 @@ export default function StudentsTable({
                     color="success"
                     aria-label="show"
                     // LINK Add Student
-                    onClick={handleAddStudent}
+                    onClick={handleAddUser}
                   >
                     <PersonAddIcon />
                   </IconButton>
