@@ -6,8 +6,6 @@ import Toolbar from '@mui/material/Toolbar'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
-import Volunteers from 'components/containers/Volunteers'
-import Contributors from 'components/containers/Contributors'
 import Copyright from 'components/miscellaneous/Copyright'
 import Sidebar from '../../components/Sidebar'
 import AppBar from 'components/AppBar'
@@ -52,21 +50,9 @@ function DashboardContent() {
                   <StudentsTable isDash />
                 </Paper>
               </Grid>
-              {/* Recent Contributors */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Contributors title="Colaboradores Recentes" showLink />
-                </Paper>
-              </Grid>
-              {/* Recent Volunteers */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Volunteers title="Voluntarios Recentes" showLink />
-                </Paper>
-              </Grid>
             </Grid>
-            <Copyright sx={{ pt: 4 }} />
           </Container>
+          <Copyright sx={{ pt: 4 }} />
         </Box>
       </Box>
     </ThemeProvider>
