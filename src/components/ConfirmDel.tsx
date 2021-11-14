@@ -42,6 +42,8 @@ export default function ConfirmDel({
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
           Voce está prestes de deletar o cadastro do aluno {studentName}
+        </DialogContentText>
+        <DialogContentText id="alert-dialog-description">
           Esta operação é irreversivel, cuidado!!!
         </DialogContentText>
       </DialogContent>
