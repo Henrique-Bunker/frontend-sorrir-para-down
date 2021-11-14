@@ -24,7 +24,7 @@ const UsersPage = ({ component, gridSize }: Props) => {
   const [size, setSize] = React.useState(gridSize)
   // NOTE handleCloseTab
   const handleCloseTab = () => {
-    setSize(7)
+    setSize(6)
     setShowElement(
       <ShowUsersTable
         handleAddUser={handleAddMember}
@@ -62,11 +62,7 @@ const UsersPage = ({ component, gridSize }: Props) => {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar
-          toggleDrawer={toggleDrawer}
-          openState={open}
-          title="Colaboradores"
-        />
+        <AppBar toggleDrawer={toggleDrawer} openState={open} title="Usuarios" />
         <Sidebar toggleDrawer={toggleDrawer} openState={open} />
         <Box
           component="main"

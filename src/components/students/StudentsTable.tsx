@@ -198,10 +198,10 @@ export default function StudentsTable({
   // !SECTION
   return (
     <>
-      <Title>Alunos Recentes</Title>
+      {isDash && <Title>Alunos</Title>}
       <Divider />
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+        <Table sx={{ minWidth: 300 }} aria-label="custom pagination table">
           {/* NOTE TABLE HEADER */}
           <TableHead>
             <TableRow>

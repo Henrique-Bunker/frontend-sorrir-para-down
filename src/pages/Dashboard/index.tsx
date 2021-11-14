@@ -10,6 +10,7 @@ import Copyright from 'components/miscellaneous/Copyright'
 import Sidebar from '../../components/Sidebar'
 import AppBar from 'components/AppBar'
 import StudentsTable from 'components/students/StudentsTable'
+import ShowUsersTable from 'components/users/ShowUsersTable'
 
 const mdTheme = createTheme()
 
@@ -44,10 +45,14 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Recent Students */}
-              <Grid item xs={12}>
+              <Grid item sm={12} md={8}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <StudentsTable isDash />
+                </Paper>
+              </Grid>
+              <Grid item sm={12} md={4}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                  <ShowUsersTable isDash />
                 </Paper>
               </Grid>
             </Grid>
