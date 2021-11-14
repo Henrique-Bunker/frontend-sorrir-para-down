@@ -47,21 +47,20 @@
       "id": 1
     }
   ],
-  "contributors": [
-    {
-      "id": 0,
-      "name": "",
-      "cpf": "",
-      "joinDate": "",
-      "birthDate": ""
-    }
-  ],
   "users": [
     {
-      "id": 0,
-      "usarname": "admin",
+      "username": "admin",
       "password": "admin",
-      "userLevel": 3
+      "active": true,
+      "role": "adm",
+      "id": 0
+    },
+    {
+      "username": "supervisor",
+      "password": "12345678",
+      "active": true,
+      "role": "sup",
+      "id": 1
     }
   ]
 }
