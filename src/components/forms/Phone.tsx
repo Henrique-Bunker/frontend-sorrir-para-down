@@ -2,13 +2,15 @@ import * as React from 'react'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import './phone.css'
+import { StudentProp } from 'types/Student'
 
 type Props = {
   handler: (phone: string) => void
+  props?: StudentProp
 }
 
-const Phone = ({ handler }: Props) => {
-  const [phone, setPhone] = React.useState('')
+const Phone = ({ handler, props }: Props) => {
+  const [phone, setPhone] = React.useState(props?.phone ? props.phone : '')
 
   const handlePhone = (memberPhone: string) => {
     setPhone(memberPhone)
