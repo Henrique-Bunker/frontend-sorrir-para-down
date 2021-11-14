@@ -61,7 +61,7 @@ const StudentFather = ({ handleIncome, handleBirth, props }: Props) => {
           <TextField
             required
             id="fatherSubName"
-            name="fatherSubname"
+            name="fatherSubName"
             label="Sobrenome"
             fullWidth
             autoComplete="family-name"
