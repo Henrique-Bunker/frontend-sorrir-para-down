@@ -304,7 +304,7 @@ export default function ShowUsersTable({
         </Table>
       </TableContainer>
       {isDash && (
-        <Link color="primary" href="/alunos" sx={{ mt: 3 }}>
+        <Link color="primary" href="/usuarios" sx={{ mt: 3 }}>
           Mostrar mais
         </Link>
       )}
