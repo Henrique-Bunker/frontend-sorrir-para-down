@@ -5,32 +5,34 @@ import ListSubheader from '@mui/material/ListSubheader'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import PeopleIcon from '@mui/icons-material/People'
 import AssignmentIcon from '@mui/icons-material/Assignment'
+import AssessmentIcon from '@mui/icons-material/Assessment'
+import { Link } from 'react-router-dom'
 
 export const mainListItems = (
   <div>
-    <ListItem button>
+    <ListItem button component={Link} to="/dashboard">
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to="/alunos">
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Alunos" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to="/usuarios">
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Colaboradores" />
+      <ListItemText primary="Usuarios" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <PeopleIcon />
+        <AssessmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Voluntarios" />
+      <ListItemText primary="Relatorios" />
     </ListItem>
   </div>
 )
