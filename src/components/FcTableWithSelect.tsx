@@ -229,12 +229,16 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
 
 type Props = {
   handleChange: (field: FamilyMemberProp[]) => void
+  studentData?: FamilyMemberProp[]
 }
 
 // !SECTION
 
 // SECTION FcTableWithSelect
-export default function FcTableWithSelect({ handleChange }: Props) {
+export default function FcTableWithSelect({
+  handleChange,
+  studentData
+}: Props) {
   const [order, setOrder] = React.useState<Order>('asc')
   const [orderBy, setOrderBy] = React.useState<keyof FamilyMemberProp>('income')
   const [selected, setSelected] = React.useState<readonly string[]>([])
@@ -242,14 +246,13 @@ export default function FcTableWithSelect({ handleChange }: Props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
   const [fill, setFill] = React.useState(false)
   // NOTE [data, setData]
-  const [data, setData] = React.useState<FamilyMemberProp[]>([
-    {
-      id: 'dummy-id',
-      name: '',
-      age: 0,
-      income: 0
+  const [data, setData] = React.useState<FamilyMemberProp[]>([])
+
+  React.useEffect(() => {
+    if (studentData && studentData.length > 0) {
+      setData(studentData)
     }
-  ])
+  }, [studentData])
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
