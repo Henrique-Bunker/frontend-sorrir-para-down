@@ -6,15 +6,17 @@ type Props = {
   id: string
   rows: number
   handler: (input: string) => void
+  inputValue?: string
 }
 
 export default function MultilineTextFields({
   label,
   id,
   rows,
-  handler
+  handler,
+  inputValue
 }: Props) {
-  const [value, setValue] = React.useState('')
+  const [value, setValue] = React.useState(inputValue ? inputValue : '')
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value)
