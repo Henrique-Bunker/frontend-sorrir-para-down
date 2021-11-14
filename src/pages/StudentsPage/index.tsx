@@ -22,22 +22,40 @@ type Props = {
 const StudentsPage = ({ component, gridSize }: Props) => {
   const [open, setOpen] = React.useState(true)
   const [size, setSize] = React.useState(gridSize)
+  // NOTE handleCloseTab
+  const handleCloseTab = () => {
+    setSize(12)
+    setShowElement(
+      <StudentsTable
+        handleAddStudent={handleAddMember}
+        handleEdit={handleEditTab}
+        handleClose={handleCloseTab}
+      />
+    )
+  }
   // NOTE handleAddMember
   const handleAddMember = () => {
     setShowElement(<AddStudent handleCloseTab={handleCloseTab} />)
     setSize(8)
   }
+  // NOTE handleEditTab
+  const handleEditTab = (component: JSX.Element) => {
+    setSize(8)
+    setShowElement(component)
+  }
   const [showElement, setShowElement] = React.useState(
-    component ? component : <StudentsTable handleAddStudent={handleAddMember} />
+    component ? (
+      component
+    ) : (
+      <StudentsTable
+        handleAddStudent={handleAddMember}
+        handleEdit={handleEditTab}
+        handleClose={handleCloseTab}
+      />
+    )
   )
   const toggleDrawer = () => {
     setOpen(!open)
-  }
-
-  // NOTE handleCloseTab
-  const handleCloseTab = () => {
-    setSize(12)
-    setShowElement(<StudentsTable handleAddStudent={handleAddMember} />)
   }
 
   return (

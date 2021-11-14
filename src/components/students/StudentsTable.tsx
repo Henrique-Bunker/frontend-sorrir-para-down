@@ -27,9 +27,12 @@ import { StudentProp } from 'types/Student'
 import Title from '../miscellaneous/Title'
 import { Divider } from '@mui/material'
 import ShowStudent from './ShowStudent'
+import EditStudent from './EditStudent'
 
 type Props = {
   handleAddStudent?: () => void
+  handleEdit?: (component: JSX.Element) => void
+  handleClose?: () => void
   isDash?: boolean
 }
 
@@ -131,20 +134,17 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
 }
 
 // SECTION Students Table
-export default function StudentsTable({ handleAddStudent, isDash }: Props) {
+export default function StudentsTable({
+  handleAddStudent,
+  handleEdit,
+  handleClose,
+  isDash
+}: Props) {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(isDash ? 5 : 10)
 
   // NOTE default Students
-  const [students, setStudents] = React.useState<StudentProp[]>([
-    {
-      id: 0,
-      name: '',
-      subname: '',
-      responsible: '',
-      birthDate: new Date()
-    }
-  ])
+  const [students, setStudents] = React.useState<StudentProp[]>([])
 
   // NOTE Open Del Dialog
   const openDelDialog = (student: StudentProp) => {
@@ -160,6 +160,15 @@ export default function StudentsTable({ handleAddStudent, isDash }: Props) {
   // NOTE Handle Show Student
   const handleShowStudent = (student: StudentProp) => {
     render(<ShowStudent props={student} />)
+  }
+
+  // NOTE Handle Show Student
+  const handleEditStudent = (student: StudentProp) => {
+    if (handleClose && handleEdit) {
+      handleEdit(
+        <EditStudent studentDate={student} handleCloseTab={handleClose} />
+      )
+    }
   }
 
   // ANCHOR Request
@@ -248,7 +257,14 @@ export default function StudentsTable({ handleAddStudent, isDash }: Props) {
                     >
                       <VisibilityIcon />
                     </IconButton>
-                    <IconButton color="info" aria-label="edit">
+                    <IconButton
+                      color="info"
+                      aria-label="edit"
+                      onClick={() => {
+                        // LINK Edit Student
+                        handleEditStudent(student)
+                      }}
+                    >
                       <EditIcon />
                     </IconButton>
                     <IconButton
