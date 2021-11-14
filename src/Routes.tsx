@@ -13,7 +13,7 @@ const Routes = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/alunos" element={<StudentsPage gridSize={12} />} />
-        <Route path="/usuarios" element={<UsersPage gridSize={7} />} />
+        <Route path="/usuarios" element={<UsersPage gridSize={6} />} />
       </ReactRoutes>
     </BrowserRouter>
   )
