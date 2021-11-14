@@ -9,6 +9,7 @@ import Copyright from '../../components/miscellaneous/Copyright'
 import Sidebar from '../../components/Sidebar'
 import AppBar from '../../components/AppBar'
 import ShowUsersTable from '../../components/users/ShowUsersTable'
+import AddUser from '../../components/users/AddUser'
 import type { GridSize } from '@material-ui/core'
 
 const mdTheme = createTheme()
@@ -23,10 +24,10 @@ const UsersPage = ({ component, gridSize }: Props) => {
   const [size, setSize] = React.useState(gridSize)
   // NOTE handleCloseTab
   const handleCloseTab = () => {
-    setSize(12)
+    setSize(7)
     setShowElement(
       <ShowUsersTable
-        handleAddStudent={handleAddMember}
+        handleAddUser={handleAddMember}
         handleEdit={handleEditTab}
         handleClose={handleCloseTab}
       />
@@ -34,12 +35,12 @@ const UsersPage = ({ component, gridSize }: Props) => {
   }
   // NOTE handleAddMember
   const handleAddMember = () => {
-    // setShowElement(<AddStudent handleCloseTab={handleCloseTab} />)
-    setSize(8)
+    setShowElement(<AddUser handleCloseTab={handleCloseTab} />)
+    setSize(4)
   }
   // NOTE handleEditTab
   const handleEditTab = (component: JSX.Element) => {
-    setSize(8)
+    setSize(4)
     setShowElement(component)
   }
   const [showElement, setShowElement] = React.useState(
@@ -47,7 +48,7 @@ const UsersPage = ({ component, gridSize }: Props) => {
       component
     ) : (
       <ShowUsersTable
-        handleAddStudent={handleAddMember}
+        handleAddUser={handleAddMember}
         handleEdit={handleEditTab}
         handleClose={handleCloseTab}
       />
