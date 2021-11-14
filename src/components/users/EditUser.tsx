@@ -9,6 +9,8 @@ import { UserProps } from 'types/User'
 import axios from 'axios'
 import TextField from '@mui/material/TextField'
 import SelectRole from 'components/forms/SelectRole'
+import Popout from 'components/Popout'
+import { render } from '@testing-library/react'
 
 type Props = {
   handleCloseTab: () => void
@@ -35,40 +37,52 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
   const [permission, setPermission] = React.useState<string>(
     userDate?.role ? userDate.role : ''
   )
-  const [user, setUser] = React.useState<string>(
-    userDate?.username && userDate.username
-  )
 
-  const [password, setPassword] = React.useState<string>(
-    userDate?.password && userDate.password
-  )
+  const user = userDate.username
+
+  const [password, setPassword] = React.useState<string>('')
+  const [passwordConfirm, setPasswordConfirm] = React.useState<string>('')
+
+  const renderPopout = (title: string, errors: string[]) => {
+    render(<Popout title={title} listErrors={errors} />)
+  }
 
   const handlePermission = (value: string) => {
     setPermission(value)
   }
 
   // NOTE handleSubmit
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    // ANCHOR Post
-    // TODO handle null | undefined | values
-    axios
-      .put(`http://localhost:5000/users/${userDate.id}`, {
-        username: user,
-        password: password,
-        active: true,
-        role: permission
-      })
-      .then(() => {
-        window.location.reload()
-      })
 
-    //console.log(event.currentTarget)
-    console.log({
-      username: user,
-      subName: password
-      //birthDate: data.get('birthDate')
-    })
+    const errors = []
+
+    if (password.length < 8) {
+      errors.push('Senha muito curta, utilize pelo menos 8 caracteres')
+    }
+
+    if (password != passwordConfirm) {
+      errors.push('Senhas não iguais')
+    }
+
+    if (permission.length < 1) {
+      errors.push('Selecione um nivem de permissão do usuario')
+    }
+
+    if (errors.length > 0) {
+      renderPopout('Error', errors)
+    } else {
+      axios
+        .put(`http://localhost:5000/users/${userDate.id}`, {
+          username: user,
+          password: password,
+          active: true,
+          role: permission
+        })
+        .then(() => {
+          window.location.reload()
+        })
+    }
   }
   return (
     <Paper variant="outlined">
@@ -89,13 +103,13 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
               {/* LINK - User */}
               <TextField
                 required
+                disabled
                 id="userName"
                 name="userName"
                 label="User"
                 type="text"
                 fullWidth
-                onChange={(input) => setUser(input.target.value as string)}
-                autoComplete="student-name"
+                autoComplete="user-name"
                 variant="standard"
                 value={user}
               />
@@ -124,10 +138,12 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
                 label="Repetir nova Senha"
                 type="password"
                 fullWidth
-                onChange={(input) => setPassword(input.target.value as string)}
+                onChange={(input) =>
+                  setPasswordConfirm(input.target.value as string)
+                }
                 autoComplete="student-name"
                 variant="standard"
-                value={password}
+                value={passwordConfirm}
               />
             </Grid>
             <Grid item xs={12} sm={12}>
