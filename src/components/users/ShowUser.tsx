@@ -16,7 +16,7 @@ type Props = {
 export default function ShowStudent({ props }: Props) {
   const [open, setOpen] = React.useState(true)
   const fullWidth = true
-  const maxWidth: DialogProps['maxWidth'] = 'md'
+  const maxWidth: DialogProps['maxWidth'] = 'xs'
 
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
