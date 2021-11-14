@@ -50,9 +50,6 @@ export default function ShowStudent({ props }: Props) {
               </Typography>
               <Typography>{`Usuario: ${props.username}`}</Typography>
               <Typography>{`Permissão: ${props.role}`}</Typography>
-              <Typography>{`Ativo: ${
-                props.active ? 'Sim' : 'Não'
-              }`}</Typography>
             </Item>
           </Grid>
         </Grid>

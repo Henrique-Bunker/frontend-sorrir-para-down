@@ -47,7 +47,7 @@ interface TablePaginationActionsProps {
 }
 
 interface Column {
-  id: 'user' | 'role' | 'active'
+  id: 'user' | 'role'
   label: string | JSX.Element
   minWidth?: number
   align?: 'right' | 'center'
@@ -55,9 +55,8 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'user', label: 'Usuario', minWidth: 170 },
-  { id: 'role', label: 'Permissão', minWidth: 170 },
-  { id: 'active', label: 'Ativo', minWidth: 100 }
+  { id: 'user', label: 'Usuario', minWidth: 50 },
+  { id: 'role', label: 'Permissão', minWidth: 50 }
 ]
 
 // SECTION Pagination Actions
@@ -194,10 +193,10 @@ export default function ShowUsersTable({
   // !SECTION
   return (
     <>
-      <Title>Usuarios Recentes</Title>
+      {isDash && <Title>Usuarios</Title>}
       <Divider />
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+        <Table sx={{ minWidth: 200 }} aria-label="custom pagination table">
           {/* NOTE TABLE HEADER */}
           <TableHead>
             <TableRow>
@@ -238,9 +237,6 @@ export default function ShowUsersTable({
                   {user.username}
                 </TableCell>
                 <TableCell style={{ width: 160 }}>{user.role}</TableCell>
-                <TableCell style={{ width: 160 }}>
-                  {user.active ? 'Sim' : 'Não'}
-                </TableCell>
                 {!isDash && (
                   <TableCell style={{ width: 160 }} align="right">
                     <IconButton
