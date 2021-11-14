@@ -21,18 +21,38 @@ type Props = {
 }
 
 const EditStudent = ({ handleCloseTab, studentDate }: Props) => {
-  const [composition, setComposition] = React.useState<FamilyMemberProp[]>([])
-  const [phone, setPhone] = React.useState('')
+  const [composition, setComposition] = React.useState<FamilyMemberProp[]>(
+    studentDate?.familyComposition ? studentDate.familyComposition : []
+  )
+  const [phone, setPhone] = React.useState(
+    studentDate?.phone ? studentDate.phone : ''
+  )
   const [birthDate, setBirthDate] = React.useState<Date>(studentDate.birthDate)
-  const [assocDate, setAssocDate] = React.useState<Date>()
-  const [isINSS, setIsINSS] = React.useState(false)
-  const [isAPAE, setIsAPAE] = React.useState(false)
-  const [residance, setResidance] = React.useState<string>()
-  const [rentValue, setRentValue] = React.useState(0.0)
-  const [motherBirthDate, setMotherBirthDate] = React.useState<Date>()
-  const [fatherBirthDate, setFatherBirthDate] = React.useState<Date>()
-  const [incomeFather, setIncomeFather] = React.useState<number>()
-  const [incomeMother, setIncomeMother] = React.useState<number>()
+  const [assocDate, setAssocDate] = React.useState<Date>(
+    studentDate?.associationData && studentDate.associationData
+  )
+  const [isINSS, setIsINSS] = React.useState(
+    studentDate?.receiveINSS ? true : false
+  )
+  const [isAPAE, setIsAPAE] = React.useState(studentDate?.isAPAE ? true : false)
+  const [residance, setResidance] = React.useState<string>(
+    studentDate?.residence && studentDate.residence
+  )
+  const [rentValue, setRentValue] = React.useState(
+    studentDate?.rentValue ? studentDate.rentValue : 0.0
+  )
+  const [motherBirthDate, setMotherBirthDate] = React.useState<Date>(
+    studentDate?.motherDN && studentDate.motherDN
+  )
+  const [fatherBirthDate, setFatherBirthDate] = React.useState<Date>(
+    studentDate?.fatherDN && studentDate.fatherDN
+  )
+  const [incomeFather, setIncomeFather] = React.useState<number>(
+    studentDate?.fatherIncome && studentDate.fatherIncome
+  )
+  const [incomeMother, setIncomeMother] = React.useState<number>(
+    studentDate?.motherIncome && studentDate.motherIncome
+  )
   const [obs, setObs] = React.useState<string>()
   const [activities, setActivities] = React.useState<string>()
 
@@ -91,6 +111,18 @@ const EditStudent = ({ handleCloseTab, studentDate }: Props) => {
     setFatherBirthDate(birthDate)
   }
 
+  React.useEffect(() => {
+    if (studentDate.obs) {
+      setObs(studentDate.obs)
+    }
+  }, [studentDate.obs])
+
+  React.useEffect(() => {
+    if (studentDate.othersActivities) {
+      setActivities(studentDate.othersActivities)
+    }
+  }, [studentDate.othersActivities])
+
   //NOTE getFamilyIncome
   const getFamilyIncome = () => {
     let sumIncome = 0
@@ -111,7 +143,7 @@ const EditStudent = ({ handleCloseTab, studentDate }: Props) => {
     // ANCHOR Post
     // TODO handle null | undefined | values
     axios
-      .put(`http://localhost:5000/members`, {
+      .put(`http://localhost:5000/members/${studentDate.id}`, {
         name: data.get('studentName'),
         subname: data.get('subname'),
         responsible: data.get('responsable'),
@@ -146,7 +178,6 @@ const EditStudent = ({ handleCloseTab, studentDate }: Props) => {
         obs: obs
       })
       .then(() => {
-        console.log({ phone })
         window.location.reload()
       })
 
