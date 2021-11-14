@@ -9,6 +9,8 @@
       "phone": "47999999999",
       "email": "fulano@gmail.com",
       "city": "Joinville",
+      "state": "SC",
+      "zipcode": "89201203",
       "associationData": "2021-11-12T03:00:00.000Z",
       "receiveINSS": true,
       "isAPAE": true,
