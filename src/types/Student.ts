@@ -8,6 +8,7 @@ export type StudentProp = {
   receiveINSS: boolean
   isAPAE: boolean
   birthDate: Date
+  associationData: Date
   school: string
   schoolSerie: string
   // Adress
