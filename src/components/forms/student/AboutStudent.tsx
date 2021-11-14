@@ -1,3 +1,4 @@
+import * as React from 'react'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Phone from 'components/forms/Phone'
@@ -41,6 +42,21 @@ const AboutStudent = ({
   handleApae,
   props
 }: Props) => {
+  const [nameLabel, setNameLabel] = React.useState(
+    props?.name ? props.name : ''
+  )
+  const [subNameLabel, setSubNameLabel] = React.useState(
+    props?.subname ? props.subname : ''
+  )
+  const [email, setEmail] = React.useState(props?.email ? props.email : '')
+
+  const [school, setSchool] = React.useState(props?.school ? props.school : '')
+  const [schoolSerie, setSchoolSerie] = React.useState(
+    props?.schoolSerie ? props.schoolSerie : ''
+  )
+  const [responsible, setResponsible] = React.useState(
+    props?.responsible ? props.responsible : ''
+  )
   return (
     <>
       <Divider variant="middle" sx={{ alignItems: 'center' }}>
@@ -55,9 +71,10 @@ const AboutStudent = ({
             name="studentName"
             label="Nome"
             fullWidth
+            onChange={(input) => setNameLabel(input.target.value as string)}
             autoComplete="student-name"
             variant="standard"
-            value={props?.name}
+            value={nameLabel}
           />
         </Grid>
         {/* LINK - Subname */}
@@ -70,7 +87,8 @@ const AboutStudent = ({
             fullWidth
             autoComplete="sub-name"
             variant="standard"
-            value={props?.subname}
+            onChange={(input) => setSubNameLabel(input.target.value as string)}
+            value={subNameLabel}
           />
         </Grid>
         {/* LINK - BirthDate */}
@@ -96,7 +114,8 @@ const AboutStudent = ({
             fullWidth
             autoComplete="email-form"
             variant="standard"
-            value={props?.email}
+            onChange={(input) => setEmail(input.target.value as string)}
+            value={email}
           />
         </Grid>
         {/* LINK - Association */}
@@ -118,7 +137,8 @@ const AboutStudent = ({
             fullWidth
             variant="standard"
             autoComplete="student-responsable"
-            value={props?.responsible}
+            onChange={(input) => setResponsible(input.target.value as string)}
+            value={responsible}
           />
         </Grid>
         {/* LINK - INSS */}
@@ -149,7 +169,8 @@ const AboutStudent = ({
             fullWidth
             autoComplete="student-school"
             variant="standard"
-            value={props?.school}
+            onChange={(input) => setSchool(input.target.value as string)}
+            value={school}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -162,7 +183,8 @@ const AboutStudent = ({
             fullWidth
             autoComplete="student-serie"
             variant="standard"
-            value={props?.schoolSerie}
+            onChange={(input) => setSchoolSerie(input.target.value as string)}
+            value={schoolSerie}
           />
         </Grid>
       </Grid>
