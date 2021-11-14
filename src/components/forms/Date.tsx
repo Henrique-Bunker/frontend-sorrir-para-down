@@ -9,14 +9,18 @@ type Props = {
   txtLabel: string
   componentName: string
   handler: (date: Date) => void
+  initialValue?: Date
 }
 
 export default function BasicDatePicker({
   txtLabel,
   componentName,
-  handler
+  handler,
+  initialValue
 }: Props) {
-  const [value, setValue] = React.useState<Date>(new Date())
+  const [value, setValue] = React.useState<Date>(
+    initialValue ? initialValue : new Date()
+  )
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns} locale={brLocale}>
