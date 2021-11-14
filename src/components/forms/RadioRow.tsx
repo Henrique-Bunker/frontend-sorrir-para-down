@@ -14,14 +14,16 @@ type Props = {
   label: string
   values: ValueProps[]
   handler: (value: boolean) => void
+  initialValue?: boolean
 }
 
 export default function RowRadioButtonsGroup({
   label,
   values,
+  initialValue,
   handler
 }: Props) {
-  const [value, setValue] = React.useState(false)
+  const [value, setValue] = React.useState(initialValue ? initialValue : false)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if ((event.target as HTMLInputElement).value === 'true') {
