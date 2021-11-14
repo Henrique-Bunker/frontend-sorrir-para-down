@@ -244,8 +244,6 @@ export default function FcTableWithSelect({
   const [selected, setSelected] = React.useState<readonly string[]>([])
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
-  const [fill, setFill] = React.useState(false)
-  // NOTE [data, setData]
   const [data, setData] = React.useState<FamilyMemberProp[]>([])
 
   React.useEffect(() => {
@@ -298,27 +296,14 @@ export default function FcTableWithSelect({
   const handleDeleteMember = () => {
     const newData: FamilyMemberProp[] = []
 
-    selected.forEach((select) => {
-      data.forEach((member) => {
-        if (member.id != select) {
-          newData.push(member)
-          return false
-        }
-      })
+    data.forEach((member) => {
+      if (!selected.includes(member.id)) {
+        newData.push(member)
+      }
     })
 
-    if (newData.length == 0) {
-      setData([
-        {
-          id: '',
-          name: '',
-          age: 0,
-          income: 0
-        }
-      ])
-    }
-
     setData(newData)
+    handleChange(newData)
     setSelected([])
   }
 
@@ -335,10 +320,8 @@ export default function FcTableWithSelect({
 
   // NOTE handleSubmitMember
   const handleSubmitMember = (member: FamilyMemberProp) => {
-    const memberGroup = [...data, member]
-    fill ? setData(memberGroup) : setData([member])
-    setFill(true)
-    handleChange(memberGroup)
+    setData([...data, member])
+    handleChange([...data, member])
   }
 
   // NOTE handleAddCompositionMember
