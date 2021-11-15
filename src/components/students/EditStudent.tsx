@@ -13,7 +13,7 @@ import { Fab, Link, Paper } from '@mui/material'
 import ClearIcon from '@mui/icons-material/Clear'
 import Container from '@mui/material/Container'
 import { FamilyMemberProp, StudentProp } from 'types/Student'
-import axios from 'axios'
+import StudentRequests from 'services/requests/StudentRequests'
 
 type Props = {
   handleCloseTab: () => void
@@ -55,6 +55,12 @@ const EditStudent = ({ handleCloseTab, studentDate }: Props) => {
   )
   const [obs, setObs] = React.useState<string>()
   const [activities, setActivities] = React.useState<string>()
+
+  async function editStudentReg(studentID: number, studentData: StudentProp) {
+    const req = new StudentRequests()
+    await req.editStudent(studentID, studentData)
+    window.location.reload()
+  }
 
   //NOTE handlePhone
   const handlePhone = (studentPhone: string) => {
@@ -140,74 +146,46 @@ const EditStudent = ({ handleCloseTab, studentDate }: Props) => {
     const totalIncome = getFamilyIncome()
     const data = new FormData(event.currentTarget)
 
-    // ANCHOR Post
-    // TODO handle null | undefined | values
-    axios
-      .put(
-        `http://localhost:5000/members/${studentDate.id}`,
-        {
-          name: data.get('studentName'),
-          subname: data.get('subname'),
-          responsible: data.get('responsable'),
-          street: data.get('street'),
-          district: data.get('district'),
-          phone: phone,
-          email: data.get('email'),
-          city: data.get('city'),
-          state: data.get('estate'),
-          zipcode: data.get('zipcode'),
-          associationData: assocDate,
-          receiveINSS: isINSS,
-          isAPAE: isAPAE,
-          birthDate: birthDate,
-          school: data.get('studentSchool'),
-          schoolSerie: data.get('studentSerie'),
-          motherName: data.get('motherName'),
-          motherSubName: data.get('motherSubName'),
-          motherDN: motherBirthDate,
-          motherWorkplace: data.get('motherWorkplace'),
-          motherIncome: incomeMother,
-          motherAgeChildBorn: parseInt(
-            data.get('motherAgeChildBorn') as string
-          ),
-          motherSchooling: data.get('motherSchooling'),
-          fatherName: data.get('fatherName'),
-          fatherSubName: data.get('fatherSubName'),
-          fatherDN: fatherBirthDate,
-          fatherWorkplace: data.get('fatherWorkplace'),
-          fatherIncome: incomeFather,
-          fatherSchooling: data.get('fatherSchooling'),
-          familyComposition: composition,
-          familyIncome: totalIncome,
-          residence: residance,
-          rentValue: rentValue,
-          CEI: data.get('inputCei'),
-          othersActivities: activities,
-          obs: obs
-        },
-        {
-          headers: {
-            Authorization: ('Bearer ' +
-              sessionStorage.getItem('API_TOKEN')) as string
-          }
-        }
-      )
-      .then(() => {
-        window.location.reload()
-      })
-
-    //console.log(event.currentTarget)
-    console.log({
+    const studentObj = {
       name: data.get('studentName'),
-      subName: data.get('subname'),
-      birthDate: data.get('birthDate'),
+      subname: data.get('subname'),
+      responsible: data.get('responsable'),
+      street: data.get('street'),
+      district: data.get('district'),
+      phone: phone,
       email: data.get('email'),
-      phone: data.get('phone'),
-      assocDate: data.get('assocDate'),
-      responsable: data.get('responsable'),
-      studentPhone: data.get('studentPhone'),
-      composition: composition
-    })
+      city: data.get('city'),
+      state: data.get('estate'),
+      zipcode: data.get('zipcode'),
+      associationData: assocDate,
+      receiveINSS: isINSS,
+      isAPAE: isAPAE,
+      birthDate: birthDate,
+      school: data.get('studentSchool'),
+      schoolSerie: data.get('studentSerie'),
+      motherName: data.get('motherName'),
+      motherSubName: data.get('motherSubName'),
+      motherDN: motherBirthDate,
+      motherWorkplace: data.get('motherWorkplace'),
+      motherIncome: incomeMother,
+      motherAgeChildBorn: parseInt(data.get('motherAgeChildBorn') as string),
+      motherSchooling: data.get('motherSchooling'),
+      fatherName: data.get('fatherName'),
+      fatherSubName: data.get('fatherSubName'),
+      fatherDN: fatherBirthDate,
+      fatherWorkplace: data.get('fatherWorkplace'),
+      fatherIncome: incomeFather,
+      fatherSchooling: data.get('fatherSchooling'),
+      familyComposition: composition,
+      familyIncome: totalIncome,
+      residence: residance,
+      rentValue: rentValue,
+      CEI: data.get('inputCei'),
+      othersActivities: activities,
+      obs: obs
+    } as StudentProp
+
+    editStudentReg(studentDate.id, studentObj)
   }
 
   // NOTE handleAddComposition

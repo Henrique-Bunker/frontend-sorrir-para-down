@@ -5,7 +5,9 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
-import axios from 'axios'
+import StudentRequests from 'services/requests/StudentRequests'
+import Popout from 'components/Popout'
+import { render } from '@testing-library/react'
 
 type Props = {
   openDialog: boolean
@@ -20,18 +22,21 @@ export default function ConfirmDel({
 }: Props) {
   const [open, setOpen] = React.useState(openDialog)
 
-  const deleteStudent = () => {
-    axios
-      .delete(`http://localhost:5000/members/${studentID}`, {
-        headers: {
-          Authorization: ('Bearer ' +
-            sessionStorage.getItem('API_TOKEN')) as string
-        }
-      })
-      .then(() => {
-        setOpen(false)
-        window.location.reload()
-      })
+  async function delStudent() {
+    const req = new StudentRequests()
+    const res = await req.deleteStudent(studentID)
+    if (res) {
+      window.location.reload()
+    } else {
+      render(
+        <Popout
+          title="Falha ao deletar aluno"
+          listErrors={[
+            'Aluno não localizado ou falha ao se comunicas com o banco de dados'
+          ]}
+        />
+      )
+    }
   }
 
   const handleClose = () => {
@@ -56,7 +61,7 @@ export default function ConfirmDel({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Voltar</Button>
-        <Button onClick={deleteStudent} autoFocus color="error">
+        <Button onClick={delStudent} autoFocus color="error">
           Deletar
         </Button>
       </DialogActions>
