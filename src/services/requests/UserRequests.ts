@@ -55,18 +55,21 @@ export default class UserRequests {
 
   async deleteUser(userID: number) {
     let result = false
-    await axios
-      .delete(`http://localhost:5000/users/${userID}`, {
-        headers: {
-          Authorization: 'Bearer ' + this.userToken
-        }
-      })
-      .then(() => {
-        result = true
-      })
-      .catch(() => {
-        result = false
-      })
+
+    if (userID != 1) {
+      await axios
+        .delete(`http://localhost:5000/users/${userID}`, {
+          headers: {
+            Authorization: 'Bearer ' + this.userToken
+          }
+        })
+        .then(() => {
+          result = true
+        })
+        .catch(() => {
+          result = false
+        })
+    }
 
     return result
   }
