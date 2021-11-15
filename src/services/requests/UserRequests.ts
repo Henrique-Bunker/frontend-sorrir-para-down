@@ -64,6 +64,9 @@ export default class UserRequests {
       .then(() => {
         result = true
       })
+      .catch(() => {
+        result = false
+      })
 
     return result
   }
