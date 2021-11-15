@@ -8,7 +8,6 @@ import ClearIcon from '@mui/icons-material/Clear'
 import Container from '@mui/material/Container'
 import axios from 'axios'
 import TextField from '@mui/material/TextField'
-import SelectRole from 'components/forms/SelectRole'
 import Popout from 'components/Popout'
 import { render } from '@testing-library/react'
 
@@ -16,38 +15,23 @@ type Props = {
   handleCloseTab: () => void
 }
 
-const SELECT_VALUES = [
-  {
-    label: 'Usuario',
-    value: 'usr'
-  },
-  {
-    label: 'Supervisor',
-    value: 'sup'
-  },
-  {
-    label: 'Administrador',
-    value: 'adm'
-  }
-]
-
 const AddUser = ({ handleCloseTab }: Props) => {
-  const [user, setUser] = React.useState<string>('')
+  const [mail, setMail] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
   const [passwordConfirm, setPasswordConfirm] = React.useState<string>('')
-  const [permission, setPermission] = React.useState<string>('')
-
-  const handlePermission = (value: string) => {
-    setPermission(value)
-  }
 
   const renderPopout = (title: string, errors: string[]) => {
     render(<Popout title={title} listErrors={errors} />)
   }
 
-  const checkUserName = async () => {
+  const checkUserMail = async () => {
     const result = await axios.get(
-      `http://localhost:5000/users?username=${user}`
+      `http://localhost:5000/users?email=${mail}`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem('API_TOKEN')
+        }
+      }
     )
 
     if (result.data.length > 0) {
@@ -71,14 +55,10 @@ const AddUser = ({ handleCloseTab }: Props) => {
       errors.push('Senhas não iguais')
     }
 
-    if (permission.length < 1) {
-      errors.push('Selecione um nivem de permissão do usuario')
-    }
-
-    const isUserValid = await checkUserName()
+    const isUserValid = await checkUserMail()
 
     if (!isUserValid) {
-      errors.push('Usuario ja existe')
+      errors.push('Email ja cadastrado')
     }
 
     if (errors.length > 0) {
@@ -87,12 +67,18 @@ const AddUser = ({ handleCloseTab }: Props) => {
       // ANCHOR Post
       // TODO handle null | undefined | values
       axios
-        .post(`http://localhost:5000/users`, {
-          username: user,
-          password: password,
-          active: true,
-          role: permission
-        })
+        .post(
+          `http://localhost:5000/users`,
+          {
+            email: mail,
+            password: password
+          },
+          {
+            headers: {
+              Authorization: 'Bearer ' + sessionStorage.getItem('API_TOKEN')
+            }
+          }
+        )
         .then(() => {
           window.location.reload()
         })
@@ -123,18 +109,18 @@ const AddUser = ({ handleCloseTab }: Props) => {
           </Grid>
           <Grid container spacing={3} sx={{ mb: 4 }}>
             <Grid item xs={12} sm={12}>
-              {/* LINK - User */}
+              {/* LINK - Email */}
               <TextField
                 required
-                id="userName"
-                name="userName"
-                label="Usuario"
+                id="userMail"
+                name="userMail"
+                label="Email"
                 type="text"
                 fullWidth
-                onChange={(input) => setUser(input.target.value as string)}
+                onChange={(input) => setMail(input.target.value as string)}
                 autoComplete="student-name"
                 variant="standard"
-                value={user}
+                value={mail}
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -167,15 +153,6 @@ const AddUser = ({ handleCloseTab }: Props) => {
                 autoComplete="student-name"
                 variant="standard"
                 value={passwordConfirm}
-              />
-            </Grid>
-            <Grid item xs={12} sm={12}>
-              {/* LINK - Role */}
-              <SelectRole
-                label="Permissão"
-                handler={handlePermission}
-                id="role-selector"
-                values={SELECT_VALUES}
               />
             </Grid>
           </Grid>

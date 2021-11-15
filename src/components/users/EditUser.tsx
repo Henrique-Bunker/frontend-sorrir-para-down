@@ -8,7 +8,6 @@ import Container from '@mui/material/Container'
 import { UserProps } from 'types/User'
 import axios from 'axios'
 import TextField from '@mui/material/TextField'
-import SelectRole from 'components/forms/SelectRole'
 import Popout from 'components/Popout'
 import { render } from '@testing-library/react'
 
@@ -17,38 +16,14 @@ type Props = {
   userDate: UserProps
 }
 
-const SELECT_VALUES = [
-  {
-    label: 'Usuario',
-    value: 'usr'
-  },
-  {
-    label: 'Supervisor',
-    value: 'sup'
-  },
-  {
-    label: 'Administrador',
-    value: 'adm'
-  }
-]
-
 const EditStudent = ({ handleCloseTab, userDate }: Props) => {
-  // const [isAPAE, setIsAPAE] = React.useState(userDate?.isAPAE ? true : false)
-  const [permission, setPermission] = React.useState<string>(
-    userDate?.role ? userDate.role : ''
-  )
-
-  const user = userDate.username
+  const userMail = userDate.email
 
   const [password, setPassword] = React.useState<string>('')
   const [passwordConfirm, setPasswordConfirm] = React.useState<string>('')
 
   const renderPopout = (title: string, errors: string[]) => {
     render(<Popout title={title} listErrors={errors} />)
-  }
-
-  const handlePermission = (value: string) => {
-    setPermission(value)
   }
 
   // NOTE handleSubmit
@@ -65,10 +40,6 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
       errors.push('Senhas não iguais')
     }
 
-    if (permission.length < 1) {
-      errors.push('Selecione um nivem de permissão do usuario')
-    }
-
     if (errors.length > 0) {
       renderPopout('Error', errors)
     } else {
@@ -76,10 +47,8 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
         .put(
           `http://localhost:5000/users/${userDate.id}`,
           {
-            username: user,
-            password: password,
-            active: true,
-            role: permission
+            email: userMail,
+            password: password
           },
           {
             headers: {
@@ -97,14 +66,9 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
     <Paper variant="outlined">
       <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <Grid
-            container
-            justifyContent="space-between"
-            alignContent="flex-end"
-            sx={{ p: 3, mb: 2 }}
-          >
+          <Grid container justifyContent="space-between">
             <Typography variant="h6" gutterBottom>
-              Editar {userDate.username}
+              Editar
             </Typography>
           </Grid>
           <Grid container spacing={3} sx={{ mb: 4, mt: 2 }}>
@@ -120,7 +84,7 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
                 fullWidth
                 autoComplete="user-name"
                 variant="standard"
-                value={user}
+                value={userMail}
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -153,16 +117,6 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
                 autoComplete="student-name"
                 variant="standard"
                 value={passwordConfirm}
-              />
-            </Grid>
-            <Grid item xs={12} sm={12}>
-              {/* LINK - Role */}
-              <SelectRole
-                label="Permissão"
-                handler={handlePermission}
-                id="role-selector"
-                values={SELECT_VALUES}
-                inputValue={permission}
               />
             </Grid>
           </Grid>

@@ -47,7 +47,7 @@ interface TablePaginationActionsProps {
 }
 
 interface Column {
-  id: 'user' | 'role'
+  id: 'email' | 'role'
   label: string | JSX.Element
   minWidth?: number
   align?: 'right' | 'center'
@@ -55,8 +55,7 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'user', label: 'Usuario', minWidth: 50 },
-  { id: 'role', label: 'Permissão', minWidth: 50 }
+  { id: 'email', label: 'Usuario', minWidth: 50 }
 ]
 
 // SECTION Pagination Actions
@@ -146,11 +145,7 @@ export default function ShowUsersTable({
   // NOTE Open Del Dialog
   const openDelDialog = (user: UserProps) => {
     render(
-      <DelUser
-        userName={`${user.username}`}
-        userID={user.id}
-        openDialog={true}
-      />
+      <DelUser userName={`${user.email}`} userID={user.id} openDialog={true} />
     )
   }
 
@@ -240,9 +235,8 @@ export default function ShowUsersTable({
               <TableRow key={user.id}>
                 {/* NOTE TABLE ROWS */}
                 <TableCell component="th" scope="row">
-                  {user.username}
+                  {user.email}
                 </TableCell>
-                <TableCell style={{ width: 160 }}>{user.role}</TableCell>
                 {!isDash && (
                   <TableCell style={{ width: 160 }} align="right">
                     <IconButton

@@ -3,7 +3,6 @@ import Button from '@mui/material/Button'
 import Dialog, { DialogProps } from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
 import { Grid, Typography } from '@mui/material'
 import { UserProps } from 'types/User'
 import { styled } from '@mui/material/styles'
@@ -38,7 +37,6 @@ export default function ShowStudent({ props }: Props) {
       fullWidth={fullWidth}
       maxWidth={maxWidth}
     >
-      <DialogTitle id="alert-dialog-title">{`Aluno: ${props.username}`}</DialogTitle>
       <DialogContent sx={{ backgroundColor: '#f5f5f5;' }}>
         <Grid container spacing={3} marginTop={1}>
           <Grid item xs>
@@ -46,8 +44,7 @@ export default function ShowStudent({ props }: Props) {
               <Typography variant="h6" marginRight={2}>
                 Sobre:
               </Typography>
-              <Typography>{`Usuario: ${props.username}`}</Typography>
-              <Typography>{`Permissão: ${props.role}`}</Typography>
+              <Typography>{`Usuario: ${props.email}`}</Typography>
             </Item>
           </Grid>
         </Grid>
