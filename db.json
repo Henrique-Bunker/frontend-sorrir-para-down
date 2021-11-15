@@ -49,15 +49,8 @@
   ],
   "users": [
     {
-      "username": "admin",
-      "password": "admin",
-      "role": "adm",
-      "id": 0
-    },
-    {
-      "username": "supervisor",
-      "password": "12345678",
-      "role": "sup",
+      "email": "admin@admin.com",
+      "password": "$2a$10$cpPu86s7PZ51mAv4IlHWY.Y7DQo/oR609GDbKM/xxOhjL4lS.Iuo6",
       "id": 1
     }
   ]
