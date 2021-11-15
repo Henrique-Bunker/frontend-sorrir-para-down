@@ -16,7 +16,6 @@ import FirstPageIcon from '@mui/icons-material/FirstPage'
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import LastPageIcon from '@mui/icons-material/LastPage'
-import axios from 'axios'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import VisibilityIcon from '@mui/icons-material/Visibility'
@@ -28,6 +27,7 @@ import Title from '../miscellaneous/Title'
 import { Divider } from '@mui/material'
 import ShowUser from './ShowUser'
 import EditUser from './EditUser'
+import UserRequests from 'services/requests/UserRequests'
 
 type Props = {
   handleAddUser?: () => void
@@ -163,15 +163,12 @@ export default function ShowUsersTable({
 
   // ANCHOR Request
   React.useEffect(() => {
-    axios
-      .get(`http://localhost:5000/users`, {
-        headers: {
-          Authorization: 'Bearer ' + sessionStorage.getItem('API_TOKEN')
-        }
-      })
-      .then((response) => {
-        setUsers(response.data)
-      })
+    async function getUsers() {
+      const req = new UserRequests()
+      const result = await req.getUsers()
+      setUsers(result)
+    }
+    getUsers()
   }, [setUsers])
 
   // Avoid a layout jump when reaching the last page with empty rows.

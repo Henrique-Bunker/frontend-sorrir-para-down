@@ -5,7 +5,9 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
-import axios from 'axios'
+import UserRequests from 'services/requests/UserRequests'
+import Popout from 'components/Popout'
+import { render } from '@testing-library/react'
 
 type Props = {
   openDialog: boolean
@@ -16,11 +18,22 @@ type Props = {
 export default function ConfirmDel({ openDialog, userName, userID }: Props) {
   const [open, setOpen] = React.useState(openDialog)
 
-  const deleteStudent = () => {
-    axios.delete(`http://localhost:5000/users/${userID}`).then(() => {
+  async function delUser() {
+    const req = new UserRequests()
+    const res = await req.deleteUser(userID)
+    if (res) {
       setOpen(false)
       window.location.reload()
-    })
+    } else {
+      render(
+        <Popout
+          title="Falha ao deletar usuario"
+          listErrors={[
+            'Usuario não localizado ou falha ao se comunicas com o banco de dados'
+          ]}
+        />
+      )
+    }
   }
 
   const handleClose = () => {
@@ -45,7 +58,7 @@ export default function ConfirmDel({ openDialog, userName, userID }: Props) {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Voltar</Button>
-        <Button onClick={deleteStudent} autoFocus color="error">
+        <Button onClick={delUser} autoFocus color="error">
           Deletar
         </Button>
       </DialogActions>

@@ -6,14 +6,19 @@ import Grid from '@mui/material/Grid'
 import { Paper } from '@mui/material'
 import Container from '@mui/material/Container'
 import { UserProps } from 'types/User'
-import axios from 'axios'
 import TextField from '@mui/material/TextField'
 import Popout from 'components/Popout'
 import { render } from '@testing-library/react'
+import UserRequests from 'services/requests/UserRequests'
 
 type Props = {
   handleCloseTab: () => void
   userDate: UserProps
+}
+
+type IUserProps = {
+  email: string
+  password: string
 }
 
 const EditStudent = ({ handleCloseTab, userDate }: Props) => {
@@ -24,6 +29,12 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
 
   const renderPopout = (title: string, errors: string[]) => {
     render(<Popout title={title} listErrors={errors} />)
+  }
+
+  async function editUser(userID: number, userData: IUserProps) {
+    const req = new UserRequests()
+    await req.editUser(userID, userData)
+    window.location.reload()
   }
 
   // NOTE handleSubmit
@@ -43,23 +54,10 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
     if (errors.length > 0) {
       renderPopout('Error', errors)
     } else {
-      axios
-        .put(
-          `http://localhost:5000/users/${userDate.id}`,
-          {
-            email: userMail,
-            password: password
-          },
-          {
-            headers: {
-              Authorization: ('Bearer ' +
-                sessionStorage.getItem('API_TOKEN')) as string
-            }
-          }
-        )
-        .then(() => {
-          window.location.reload()
-        })
+      editUser(userDate.id, {
+        email: userMail,
+        password: password
+      })
     }
   }
   return (

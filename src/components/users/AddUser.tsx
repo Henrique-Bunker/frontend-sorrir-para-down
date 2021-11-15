@@ -6,13 +6,18 @@ import Grid from '@mui/material/Grid'
 import { Fab, Link, Paper } from '@mui/material'
 import ClearIcon from '@mui/icons-material/Clear'
 import Container from '@mui/material/Container'
-import axios from 'axios'
 import TextField from '@mui/material/TextField'
 import Popout from 'components/Popout'
 import { render } from '@testing-library/react'
+import UserRequests from 'services/requests/UserRequests'
 
 type Props = {
   handleCloseTab: () => void
+}
+
+type IUserProps = {
+  email: string
+  password: string
 }
 
 const AddUser = ({ handleCloseTab }: Props) => {
@@ -25,20 +30,14 @@ const AddUser = ({ handleCloseTab }: Props) => {
   }
 
   const checkUserMail = async () => {
-    const result = await axios.get(
-      `http://localhost:5000/users?email=${mail}`,
-      {
-        headers: {
-          Authorization: 'Bearer ' + sessionStorage.getItem('API_TOKEN')
-        }
-      }
-    )
+    const req = new UserRequests()
+    return await req.checkUserMail(mail)
+  }
 
-    if (result.data.length > 0) {
-      return false
-    } else {
-      return true
-    }
+  async function addUser(userData: IUserProps) {
+    const req = new UserRequests()
+    await req.addUser(userData)
+    window.location.reload()
   }
 
   // NOTE handleSubmit
@@ -64,24 +63,10 @@ const AddUser = ({ handleCloseTab }: Props) => {
     if (errors.length > 0) {
       renderPopout('Error', errors)
     } else {
-      // ANCHOR Post
-      // TODO handle null | undefined | values
-      axios
-        .post(
-          `http://localhost:5000/users`,
-          {
-            email: mail,
-            password: password
-          },
-          {
-            headers: {
-              Authorization: 'Bearer ' + sessionStorage.getItem('API_TOKEN')
-            }
-          }
-        )
-        .then(() => {
-          window.location.reload()
-        })
+      addUser({
+        email: mail,
+        password: password
+      })
     }
   }
   return (
