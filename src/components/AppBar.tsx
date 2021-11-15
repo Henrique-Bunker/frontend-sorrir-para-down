@@ -4,6 +4,7 @@ import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import Typography from '@mui/material/Typography'
+import LogoutIcon from '@mui/icons-material/Logout'
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean
@@ -35,36 +36,50 @@ const AppBarContainer = styled(MuiAppBar, {
   })
 }))
 
-const AppBar = ({ toggleDrawer, openState, title }: Props) => (
-  <AppBarContainer position="absolute" open={openState}>
-    <Toolbar
-      sx={{
-        pr: '24px' // keep right padding when drawer closed
-      }}
-    >
-      <IconButton
-        edge="start"
-        color="inherit"
-        aria-label="open drawer"
-        onClick={toggleDrawer}
+const AppBar = ({ toggleDrawer, openState, title }: Props) => {
+  const handleLogout = () => {
+    sessionStorage.removeItem('API_TOKEN')
+    window.location.reload()
+  }
+  return (
+    <AppBarContainer position="absolute" open={openState}>
+      <Toolbar
         sx={{
-          marginRight: '36px',
-          ...(openState && { display: 'none' })
+          pr: '24px' // keep right padding when drawer closed
         }}
       >
-        <MenuIcon />
-      </IconButton>
-      <Typography
-        component="h1"
-        variant="h6"
-        color="inherit"
-        noWrap
-        sx={{ flexGrow: 1 }}
-      >
-        {title}
-      </Typography>
-    </Toolbar>
-  </AppBarContainer>
-)
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="open drawer"
+          onClick={toggleDrawer}
+          sx={{
+            marginRight: '36px',
+            ...(openState && { display: 'none' })
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography
+          component="h1"
+          variant="h6"
+          color="inherit"
+          noWrap
+          sx={{ flexGrow: 1 }}
+        >
+          {title}
+        </Typography>
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleLogout}
+        >
+          <LogoutIcon />
+        </IconButton>
+      </Toolbar>
+    </AppBarContainer>
+  )
+}
 
 export default AppBar

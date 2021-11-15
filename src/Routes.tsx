@@ -13,6 +13,8 @@ const Routes = () => {
     if (sessionStorage.getItem('API_TOKEN')) {
       const tempToken = sessionStorage.getItem('API_TOKEN') as string
       setToken(tempToken)
+    } else {
+      setToken(undefined)
     }
   }, [])
 
