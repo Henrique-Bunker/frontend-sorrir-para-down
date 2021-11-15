@@ -21,10 +21,17 @@ export default function ConfirmDel({
   const [open, setOpen] = React.useState(openDialog)
 
   const deleteStudent = () => {
-    axios.delete(`http://localhost:5000/members/${studentID}`).then(() => {
-      setOpen(false)
-      window.location.reload()
-    })
+    axios
+      .delete(`http://localhost:5000/members/${studentID}`, {
+        headers: {
+          Authorization: ('Bearer ' +
+            sessionStorage.getItem('API_TOKEN')) as string
+        }
+      })
+      .then(() => {
+        setOpen(false)
+        window.location.reload()
+      })
   }
 
   const handleClose = () => {

@@ -168,9 +168,15 @@ export default function ShowUsersTable({
 
   // ANCHOR Request
   React.useEffect(() => {
-    axios.get(`http://localhost:5000/users`).then((response) => {
-      setUsers(response.data)
-    })
+    axios
+      .get(`http://localhost:5000/users`, {
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem('API_TOKEN')
+        }
+      })
+      .then((response) => {
+        setUsers(response.data)
+      })
   }, [setUsers])
 
   // Avoid a layout jump when reaching the last page with empty rows.

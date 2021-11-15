@@ -143,44 +143,55 @@ const EditStudent = ({ handleCloseTab, studentDate }: Props) => {
     // ANCHOR Post
     // TODO handle null | undefined | values
     axios
-      .put(`http://localhost:5000/members/${studentDate.id}`, {
-        name: data.get('studentName'),
-        subname: data.get('subname'),
-        responsible: data.get('responsable'),
-        street: data.get('street'),
-        district: data.get('district'),
-        phone: phone,
-        email: data.get('email'),
-        city: data.get('city'),
-        state: data.get('estate'),
-        zipcode: data.get('zipcode'),
-        associationData: assocDate,
-        receiveINSS: isINSS,
-        isAPAE: isAPAE,
-        birthDate: birthDate,
-        school: data.get('studentSchool'),
-        schoolSerie: data.get('studentSerie'),
-        motherName: data.get('motherName'),
-        motherSubName: data.get('motherSubName'),
-        motherDN: motherBirthDate,
-        motherWorkplace: data.get('motherWorkplace'),
-        motherIncome: incomeMother,
-        motherAgeChildBorn: parseInt(data.get('motherAgeChildBorn') as string),
-        motherSchooling: data.get('motherSchooling'),
-        fatherName: data.get('fatherName'),
-        fatherSubName: data.get('fatherSubName'),
-        fatherDN: fatherBirthDate,
-        fatherWorkplace: data.get('fatherWorkplace'),
-        fatherIncome: incomeFather,
-        fatherSchooling: data.get('fatherSchooling'),
-        familyComposition: composition,
-        familyIncome: totalIncome,
-        residence: residance,
-        rentValue: rentValue,
-        CEI: data.get('inputCei'),
-        othersActivities: activities,
-        obs: obs
-      })
+      .put(
+        `http://localhost:5000/members/${studentDate.id}`,
+        {
+          name: data.get('studentName'),
+          subname: data.get('subname'),
+          responsible: data.get('responsable'),
+          street: data.get('street'),
+          district: data.get('district'),
+          phone: phone,
+          email: data.get('email'),
+          city: data.get('city'),
+          state: data.get('estate'),
+          zipcode: data.get('zipcode'),
+          associationData: assocDate,
+          receiveINSS: isINSS,
+          isAPAE: isAPAE,
+          birthDate: birthDate,
+          school: data.get('studentSchool'),
+          schoolSerie: data.get('studentSerie'),
+          motherName: data.get('motherName'),
+          motherSubName: data.get('motherSubName'),
+          motherDN: motherBirthDate,
+          motherWorkplace: data.get('motherWorkplace'),
+          motherIncome: incomeMother,
+          motherAgeChildBorn: parseInt(
+            data.get('motherAgeChildBorn') as string
+          ),
+          motherSchooling: data.get('motherSchooling'),
+          fatherName: data.get('fatherName'),
+          fatherSubName: data.get('fatherSubName'),
+          fatherDN: fatherBirthDate,
+          fatherWorkplace: data.get('fatherWorkplace'),
+          fatherIncome: incomeFather,
+          fatherSchooling: data.get('fatherSchooling'),
+          familyComposition: composition,
+          familyIncome: totalIncome,
+          residence: residance,
+          rentValue: rentValue,
+          CEI: data.get('inputCei'),
+          othersActivities: activities,
+          obs: obs
+        },
+        {
+          headers: {
+            Authorization: ('Bearer ' +
+              sessionStorage.getItem('API_TOKEN')) as string
+          }
+        }
+      )
       .then(() => {
         window.location.reload()
       })

@@ -9,16 +9,31 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-
 import Email from 'components/forms/Email'
 import Password from 'components/forms/Password'
 import LabelWithCheckbox from 'components/forms/LabelWithCheckbox'
 import Copyright from 'components/miscellaneous/Copyright'
+import PropTypes from 'prop-types'
+import axios from 'axios'
 
 const theme = createTheme()
 
-export default function SignIn() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+type Props = {
+  setToken: React.Dispatch<React.SetStateAction<string | undefined>>
+}
+
+type CredentialsProps = {
+  email: string
+  password: string
+}
+async function loginUser(credentials: CredentialsProps) {
+  return axios
+    .post('http://localhost:5000/login', credentials)
+    .then((res) => res.data)
+}
+
+export default function SignIn({ setToken }: Props) {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
     // eslint-disable-next-line no-console
@@ -26,6 +41,13 @@ export default function SignIn() {
       email: data.get('email'),
       password: data.get('password')
     })
+
+    const token = await loginUser({
+      email: data.get('email') as string,
+      password: data.get('password') as string
+    })
+    sessionStorage.setItem('API_TOKEN', token.accessToken)
+    setToken(token.accessToken)
   }
 
   return (
@@ -85,4 +107,8 @@ export default function SignIn() {
       </Container>
     </ThemeProvider>
   )
+}
+
+SignIn.propTypes = {
+  setToken: PropTypes.func.isRequired
 }

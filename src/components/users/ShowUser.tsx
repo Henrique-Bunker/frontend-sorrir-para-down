@@ -29,8 +29,6 @@ export default function ShowStudent({ props }: Props) {
     setOpen(false)
   }
 
-  console.log(props)
-
   return (
     <Dialog
       open={open}

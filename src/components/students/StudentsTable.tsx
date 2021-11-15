@@ -173,9 +173,15 @@ export default function StudentsTable({
 
   // ANCHOR Request
   React.useEffect(() => {
-    axios.get(`http://localhost:5000/members`).then((response) => {
-      setStudents(response.data)
-    })
+    axios
+      .get(`http://localhost:5000/members`, {
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem('API_TOKEN')
+        }
+      })
+      .then((response) => {
+        setStudents(response.data)
+      })
   }, [setStudents])
 
   // Avoid a layout jump when reaching the last page with empty rows.

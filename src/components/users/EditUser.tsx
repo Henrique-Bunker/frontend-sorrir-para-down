@@ -73,12 +73,21 @@ const EditStudent = ({ handleCloseTab, userDate }: Props) => {
       renderPopout('Error', errors)
     } else {
       axios
-        .put(`http://localhost:5000/users/${userDate.id}`, {
-          username: user,
-          password: password,
-          active: true,
-          role: permission
-        })
+        .put(
+          `http://localhost:5000/users/${userDate.id}`,
+          {
+            username: user,
+            password: password,
+            active: true,
+            role: permission
+          },
+          {
+            headers: {
+              Authorization: ('Bearer ' +
+                sessionStorage.getItem('API_TOKEN')) as string
+            }
+          }
+        )
         .then(() => {
           window.location.reload()
         })

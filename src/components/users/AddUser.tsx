@@ -50,8 +50,6 @@ const AddUser = ({ handleCloseTab }: Props) => {
       `http://localhost:5000/users?username=${user}`
     )
 
-    console.log(result.data)
-
     if (result.data.length > 0) {
       return false
     } else {
