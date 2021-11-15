@@ -14,6 +14,9 @@ import ClearIcon from '@mui/icons-material/Clear'
 import Container from '@mui/material/Container'
 import { FamilyMemberProp, StudentProp } from 'types/Student'
 import StudentRequests from 'services/requests/StudentRequests'
+import StudentValidation from './StudentValidation'
+import { render } from '@testing-library/react'
+import Popout from 'components/Popout'
 
 type Props = {
   handleCloseTab: () => void
@@ -60,6 +63,10 @@ const EditStudent = ({ handleCloseTab, studentDate }: Props) => {
     const req = new StudentRequests()
     await req.editStudent(studentID, studentData)
     window.location.reload()
+  }
+
+  const renderPopout = (title: string, errors: string[]) => {
+    render(<Popout title={title} listErrors={errors} />)
   }
 
   //NOTE handlePhone
@@ -185,7 +192,13 @@ const EditStudent = ({ handleCloseTab, studentDate }: Props) => {
       obs: obs
     } as StudentProp
 
-    editStudentReg(studentDate.id, studentObj)
+    const validation = StudentValidation(studentObj)
+
+    if (validation.length > 0) {
+      renderPopout('Campos em falta', validation)
+    } else {
+      editStudentReg(studentDate.id, studentObj)
+    }
   }
 
   // NOTE handleAddComposition
