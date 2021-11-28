@@ -5,7 +5,6 @@ import ListSubheader from '@mui/material/ListSubheader'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import PeopleIcon from '@mui/icons-material/People'
 import AssignmentIcon from '@mui/icons-material/Assignment'
-import AssessmentIcon from '@mui/icons-material/Assessment'
 import { Link } from 'react-router-dom'
 
 export const mainListItems = (
@@ -28,12 +27,14 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Usuarios" />
     </ListItem>
+    {/*
     <ListItem button component={Link} to="/relatorios">
       <ListItemIcon>
         <AssessmentIcon />
       </ListItemIcon>
       <ListItemText primary="Relatorios" />
     </ListItem>
+    */}
   </div>
 )
 
